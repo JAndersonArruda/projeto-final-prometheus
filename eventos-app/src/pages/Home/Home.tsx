@@ -1,5 +1,7 @@
 // import React from 'react'
 
+import "./home.css"
+
 import Header from "../../components/Header/Header";
 import CardEvent from "../../components/Card/CardEvent"
 
@@ -39,11 +41,11 @@ export default function Home() {
     return (
         <>
             <Header />
-            <div>
+            <div className="container-home">
                 <h1>Home</h1>
                 <p>Bem-vindo ao site!</p>
                 <p>Aqui você pode ver eventos, se inscrever, verificar seu status, etc.</p>
-                <div>
+                <div className="container-cards-event">
                     {arrayTest.map(eventDate => 
                         <CardEvent 
                             key={eventDate.id}

@@ -1,0 +1,28 @@
+.container-header {
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+    background-color: #000;
+    color: #fff;
+}
+
+.container-nav {
+    padding: 0 2rem;
+}
+
+.container-logo { 
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2rem 0;
+}
+/* 
+.span-second-titulo-logo {
+    
+}
+*/
+.image-logo {
+    width: 4em;
+    filter: brightness(0) invert(1); /* converte a cor para branco */
+}

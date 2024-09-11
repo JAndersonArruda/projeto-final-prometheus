@@ -1,3 +1,8 @@
+#root {
+    display: flex;
+    flex-direction: row;
+}
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -18,7 +23,8 @@
     padding: 0;
 }
 
-body {
+body, #root {
+    min-height: 100vh;
     text-align: center;
 }
 
