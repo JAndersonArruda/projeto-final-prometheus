@@ -1,14 +1,17 @@
 // import React from 'react'
-import { Link } from 'react-router-dom'
+
+import Header from "../../components/Header/Header";
 
 export default function Home() {
-  return (
-    <div>
-        <h1>Home</h1>
-        <Link to={"/login"}>Login</Link>
-        <Link to={"/profile"}>Perfil</Link>
-        <Link to={"/ticket-event"}>Inscrição</Link>
-        <Link to={"/events/view"}>ViewEvent</Link>
-    </div>
-  )
+    return (
+        <>
+            <Header />
+            <div>
+                <h1>Home</h1>
+                <p>Bem-vindo ao site!</p>
+                <p>Aqui você pode ver eventos, se inscrever, verificar seu status, etc.</p>
+            </div>
+        </>
+        
+    )
 }
