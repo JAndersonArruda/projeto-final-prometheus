@@ -1,3 +1,18 @@
 .container-home {
     flex: 1;
+
+}
+
+.container-cards-event {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 3rem 1.5rem;
+
+}
+
+.container-cards-event::after {
+    content: ""; /* Um pseudo-elemento vazio */
+    flex: auto; /* Ele ocupa o espaço restante da última linha */
 }
