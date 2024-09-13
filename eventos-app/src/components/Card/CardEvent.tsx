@@ -11,9 +11,9 @@ interface CardEventProps {
 
 function CardEvent({ id, title, image, dateTime, localEvent } : CardEventProps) {
     return ( 
-        <div className="card-event" id={id.toString()}>
-            <h1>{title}</h1>
+        <div id={id.toString()} className="card-event">
             <img src={image} alt=""/>
+            <h1>{title}</h1>
             <p>{dateTime.toString()}</p>
             <p><i>iconLocal</i>{localEvent}</p>
         </div>
