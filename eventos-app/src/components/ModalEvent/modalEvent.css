@@ -1,0 +1,61 @@
+.container-modal-event {
+    padding: 3rem 2rem;
+    background-color: #fff;
+    border-radius: .5rem;
+    /* flex-grow: 0;
+    flex: 1 0 auto; */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+
+.element {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 30%;
+    padding: .3rem 0;
+}
+
+.element input, .element textarea{
+    width: 100%;
+    padding:.5rem;
+    border-radius:.2rem;
+    border: 1px solid #ccc;
+    margin-bottom:.5rem;
+}
+
+.element-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+}
+
+#data-imput { 
+    width: 150%;
+}
+
+.element-submit {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 30%;
+    padding: .3rem 0;
+}
+
+.element-submit input {
+    padding:.5rem 1.5rem;
+    border-radius:.5rem;
+    border: 1px solid #ccc;
+    margin-bottom:.5rem;
+}
+
+label {
+    margin: 0 0 .2rem .5rem;
+}

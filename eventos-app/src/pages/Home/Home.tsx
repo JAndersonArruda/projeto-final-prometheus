@@ -4,10 +4,10 @@ import "./home.css"
 
 import Header from "../../components/Header/Header";
 import CardEvent from "../../components/Card/CardEvent"
+import Footer from "../../components/Footer/Footer";
 
 //Utilizado para testes
 import { ArrayTest } from "../../service/ArrayDados";
-import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
     return (
