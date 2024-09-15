@@ -1,8 +1,12 @@
 // import React from 'react'
 
+import "./footer.css"
+
 function Footer() {
   return (
-    <div>Footer</div>
+    <div className="container-footer">
+      <h5>Copyrigth &copy; - Eventos</h5>
+    </div>
   )
 }
 

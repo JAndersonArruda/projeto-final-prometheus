@@ -7,6 +7,7 @@ import CardEvent from "../../components/Card/CardEvent"
 
 //Utilizado para testes
 import { ArrayTest } from "../../service/ArrayDados";
+import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
     return (
@@ -25,6 +26,7 @@ export default function Home() {
                         />
                     )}
                 </div>
+            <Footer />
             </div>
         </>
     )

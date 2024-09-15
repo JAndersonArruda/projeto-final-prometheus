@@ -6,7 +6,7 @@ import Sidebar from '../Sidebar/Sidebar'
 
 function Header() {
     return (
-        <header className="container-header">
+        <div className="container-header">
             <nav className="container-nav">
                 <div className="container-logo">
                     <img className="image-logo" src="https://www.veryicon.com/download/png/miscellaneous/2022-complete-collection-of-alibaba-cloud/prometheus-prometheus-monitoring-service-1?s=256" alt="" />
@@ -14,7 +14,7 @@ function Header() {
                 </div>
                 <Sidebar />
             </nav>
-        </header>
+        </div>
     )
 }
 
