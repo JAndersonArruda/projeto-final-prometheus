@@ -15,3 +15,8 @@ body, #root {
     text-align: center;
 }
 
+#container-page {
+    flex: 1;
+    overflow-y: auto;
+}
+

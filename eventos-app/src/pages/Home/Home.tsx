@@ -13,7 +13,7 @@ export default function Home() {
     return (
         <>
             <Header />
-            <div className="container-home">
+            <div id="container-page" className="container-home">
                 <div className="container-cards-event">
                     {ArrayTest.map(eventDate => 
                         <CardEvent 

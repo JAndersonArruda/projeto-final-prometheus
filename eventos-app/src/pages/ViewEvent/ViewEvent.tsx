@@ -1,12 +1,9 @@
 // import React from 'react'
 
-import Header from "../../components/Header/Header";
-
 export default function ViewEvent() {
     return (
         <>
-            <Header />
-            <div>
+            <div id="container-page">
                 <h1>View Eventos</h1>
             </div>
         </>
