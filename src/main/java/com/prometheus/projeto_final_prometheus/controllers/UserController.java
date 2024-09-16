@@ -12,15 +12,4 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        System.out.println(user);
-        try {
-            User newUser = userService.createUser(user);
-            return ResponseEntity.ok(newUser);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().build();
-        }
-    }
 }
