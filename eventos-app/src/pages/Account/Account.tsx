@@ -7,8 +7,6 @@ import "./account.css"
 import FormUser from "../../components/FormUser/FormUser";
 
 export default function Account() {
-    // const action = "cadastro";
-
     const location = useLocation();
     const [action, setAction] = useState("login");
 
