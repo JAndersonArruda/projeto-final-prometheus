@@ -5,7 +5,7 @@ import "./formUser.css"
 
 interface FormUserProps {
     modo: string,
-    value: string  // valor inicial do input, caso seja um formulário de edição
+    value: string 
 }
 
 export default function FormUser({ modo, value }: FormUserProps) {
