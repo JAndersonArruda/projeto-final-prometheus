@@ -46,6 +46,16 @@
     box-sizing: border-box;
 }
 
+.element-submit input:hover {
+    cursor: pointer;
+}
+
+.element-submit input:active {
+    transform: scale(0.95); 
+    background-color: #1c1c1c; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 label {
     margin: 0 0 .2rem .2rem;
 }

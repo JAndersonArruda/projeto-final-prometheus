@@ -1,5 +1,6 @@
 // import React from 'react'
 
+import { useNavigate } from "react-router-dom"
 import "./formUser.css"
 
 interface FormUserProps {
@@ -8,6 +9,12 @@ interface FormUserProps {
 }
 
 export default function FormUser({ modo, value }: FormUserProps) {
+    const navigate = useNavigate();
+    const handleSubmit = () => {
+        if (value === "Entrar") navigate("/events");
+        else if (value === "Salvar") navigate("/account/login");
+    }
+
     return (
         <>
             <form action="" className="form">
@@ -47,7 +54,7 @@ export default function FormUser({ modo, value }: FormUserProps) {
                     </>
                 ): null}
                 <div className="element-submit">
-                    <input type="button" value={value} />
+                    <input type="button" value={value} onClick={handleSubmit}/>
                 </div>
             </form>
         </>
