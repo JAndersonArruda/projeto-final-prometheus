@@ -8,9 +8,9 @@
 }
 
 .container-title, .container-link, .form{
-    -webkit-box-shadow: 41px 41px 0px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 41px 41px 0px 0px rgba(0,0,0,0.75);
-    box-shadow: 41px 41px 0px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 30px 35px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 30px 35px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 30px 35px 0px 0px rgba(0,0,0,0.75);
     border-radius: 0;
 }
 
