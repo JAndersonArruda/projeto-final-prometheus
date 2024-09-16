@@ -1,11 +1,14 @@
 CREATE TABLE events (
-                        id SERIAL PRIMARY KEY,
-                        title VARCHAR(100) NOT NULL,
-                        description TEXT,
-                        location VARCHAR(100),
-                        event_date TIMESTAMP NOT NULL,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id SERIAL,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    location VARCHAR(100),
+    event_date TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    creator_id INTEGER NOT NULL,
+    CONSTRAINT eventsPK PRIMARY KEY(id),
+    CONSTRAINT creatorFK FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE OR REPLACE FUNCTION update_modified_column()

@@ -8,7 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -37,6 +39,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserType tipo;
+
+    @OneToMany(mappedBy = "creator")
+    private Set<Event> createdEvents = new HashSet<>();
+
+    @ManyToMany(mappedBy = "participants")
+    private Set<Event> eventsAttended = new HashSet<>();
 
     public User(String username, String email, String password, UserType userType) {
         this.username = username;
