@@ -6,7 +6,7 @@
     flex: 1 0 auto; */
 }
 
-.form {
+.form-modal {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +14,7 @@
 }
 
 
-.element {
+.element-modal {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -22,7 +22,7 @@
     padding: .3rem 0;
 }
 
-.element input, .element textarea{
+.element-modal input, .element-modal textarea{
     width: 100%;
     padding:.5rem;
     border-radius:.2rem;
@@ -30,7 +30,7 @@
     margin-bottom:.5rem;
 }
 
-.element-date {
+.element-date-modal {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -41,7 +41,7 @@
     width: 150%;
 }
 
-.element-submit {
+.element-submit-modal {
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -49,13 +49,13 @@
     padding: .3rem 0;
 }
 
-.element-submit input {
+.element-submit-modal input {
     padding:.5rem 1.5rem;
     border-radius:.5rem;
     border: 1px solid #ccc;
     margin-bottom:.5rem;
 }
 
-label {
+.element-modal label {
     margin: 0 0 .2rem .5rem;
 }

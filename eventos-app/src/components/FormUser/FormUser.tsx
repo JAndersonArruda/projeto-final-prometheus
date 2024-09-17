@@ -29,39 +29,39 @@ export default function FormUser({ modo, value }: FormUserProps) {
 
     return (
         <>
-            <form action="" className="form">
+            <form action="" className="form-user">
                 {modo === "login" ? (
                     <>
-                        <div className="element">
+                        <div className="element-user">
                             <label htmlFor="username">Usuário</label>
                             <input id="username-imput" type="text" name="username" placeholder="Username" required />
                         </div>
-                        <div className="element">
+                        <div className="element-user">
                             <label htmlFor="senha">Senha</label>
                             <input id="senha-imput" type="password" name="senha" placeholder="Senha" required />
                         </div>
                     </>
                 ) : modo === "cadastro" ? (
                     <>
-                        <div className="element">
+                        <div className="element-user">
                             <label htmlFor="username">Username</label>
                             <input id="username-imput" type="text" name="username" placeholder="Username" required />
                         </div>
-                        <div className="element">
+                        <div className="element-user">
                             <label htmlFor="email">Email</label>
                             <input id="email-imput" type="text" name="email" placeholder="Email" required />
                         </div>
-                        <div className="element">
+                        <div className="element-user">
                             <label htmlFor="senha">Senha</label>
                             <input id="senha-imput" type="password" name="senha" placeholder="Senha" required />
                         </div>
-                        <div className="element">
+                        <div className="element-user">
                             <label htmlFor="confirm-senha">Confirmar Senha</label>
                             <input id="confirm-senha-imput" type="password" name="confirm-senha" placeholder="Confirmar Senha" required />
                         </div>
                     </>
                 ): null}
-                <div className="element-submit">
+                <div className="element-submit-user">
                     <input type="submit" value={value} onClick={handleSubmit}/>
                 </div>
             </form>
