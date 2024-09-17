@@ -11,8 +11,20 @@ interface FormUserProps {
 export default function FormUser({ modo, value }: FormUserProps) {
     const navigate = useNavigate();
     const handleSubmit = () => {
-        if (value === "Entrar") navigate("/events");
-        else if (value === "Salvar") navigate("/account/login");
+        if (value === "Entrar") {
+            const userName = document.querySelector<HTMLInputElement>("#username-imput");
+            const senha = document.querySelector<HTMLInputElement>("#senha-imput");
+
+            if (userName?.value && senha?.value) navigate("/events");
+        }
+        else if (value === "Salvar") {
+            const userName = document.querySelector<HTMLInputElement>("#username-imput");
+            const email = document.querySelector<HTMLInputElement>("#email-imput");
+            const senha = document.querySelector<HTMLInputElement>("#senha-imput");
+            const confirm  = document.querySelector<HTMLInputElement>("#confirm-senha-imput");
+
+            if (userName?.value && email?.value && senha?.value && confirm?.value) navigate("/account/login");
+        }
     }
 
     return (
@@ -22,35 +34,35 @@ export default function FormUser({ modo, value }: FormUserProps) {
                     <>
                         <div className="element">
                             <label htmlFor="username">Usuário</label>
-                            <input id="username-imput" type="text" name="username" placeholder="Username" />
+                            <input id="username-imput" type="text" name="username" placeholder="Username" required />
                         </div>
                         <div className="element">
                             <label htmlFor="senha">Senha</label>
-                            <input id="senha-imput" type="password" name="nome" placeholder="Senha" />
+                            <input id="senha-imput" type="password" name="senha" placeholder="Senha" required />
                         </div>
                     </>
                 ) : modo === "cadastro" ? (
                     <>
                         <div className="element">
                             <label htmlFor="username">Username</label>
-                            <input id="usernema-imput" type="text" name="username" placeholder="Username" />
+                            <input id="username-imput" type="text" name="username" placeholder="Username" required />
                         </div>
                         <div className="element">
                             <label htmlFor="email">Email</label>
-                            <input id="email-imput" type="text" name="email" placeholder="Email" />
+                            <input id="email-imput" type="text" name="email" placeholder="Email" required />
                         </div>
                         <div className="element">
                             <label htmlFor="senha">Senha</label>
-                            <input id="senha-imput" type="password" name="senha" placeholder="Senha" />
+                            <input id="senha-imput" type="password" name="senha" placeholder="Senha" required />
                         </div>
                         <div className="element">
                             <label htmlFor="confirm-senha">Confirmar Senha</label>
-                            <input id="confirm-senha-imput" type="password" name="confirm-senha" placeholder="Confirmar Senha" />
+                            <input id="confirm-senha-imput" type="password" name="confirm-senha" placeholder="Confirmar Senha" required />
                         </div>
                     </>
                 ): null}
                 <div className="element-submit">
-                    <input type="button" value={value} onClick={handleSubmit}/>
+                    <input type="submit" value={value} onClick={handleSubmit}/>
                 </div>
             </form>
         </>
