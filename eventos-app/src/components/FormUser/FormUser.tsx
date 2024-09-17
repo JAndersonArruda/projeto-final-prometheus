@@ -32,10 +32,6 @@ export default function FormUser({ modo, value }: FormUserProps) {
                 ) : modo === "cadastro" ? (
                     <>
                         <div className="element">
-                            <label htmlFor="nome">Nome</label>
-                            <input id="nome-imput" type="text" name="nome" placeholder="Nome" />
-                        </div>
-                        <div className="element">
                             <label htmlFor="username">Username</label>
                             <input id="usernema-imput" type="text" name="username" placeholder="Username" />
                         </div>
