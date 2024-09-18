@@ -1,6 +1,6 @@
 .container-view-event {
     background-color: #fff;
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
     margin: 0 25rem;
 }
 
@@ -9,7 +9,11 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
+}
+
+.content-image img {
+    width: 98%;
 }
 
 .content-title, .content-data, .content-description {
@@ -21,6 +25,7 @@
     flex-direction: column;
     justify-content: start;
     margin-bottom: .5rem;
+    text-align: start;
 }
 
 .content-data {
@@ -36,13 +41,14 @@
     text-align: justify;
 }
 
+.time-event {
+    padding-top: .2rem;
+    text-align: start;
+}
+
 .date-event {
     display: flex;
     flex-direction: column;
-}
-
-.time-event {
-    padding-top: .2rem;
 }
 
 .content-description {
