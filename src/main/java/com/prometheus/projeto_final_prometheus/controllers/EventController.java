@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -51,5 +52,24 @@ public class EventController {
         List<Event> allEvents = eventService.getAllEvents();
 
         return ResponseEntity.ok(allEvents);
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity getEventById(@PathVariable Long id) {
+        Optional<Event> events = eventService.getEventsById(id);
+
+        return ResponseEntity.ok(events.get());
+    }
+
+    @PostMapping("/edit/{id}")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity editEventById(@RequestBody EventDTO data, @PathVariable Long id) {
+        try {
+            eventService.editEvent(data.title(), data.description(), data.location(), data.eventDate(), id);
+            return ResponseEntity.ok("Event edited successfully");
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
