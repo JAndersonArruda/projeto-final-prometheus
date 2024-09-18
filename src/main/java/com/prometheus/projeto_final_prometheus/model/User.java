@@ -1,5 +1,6 @@
 package com.prometheus.projeto_final_prometheus.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,6 +41,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private UserType tipo;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "creator")
     private Set<Event> createdEvents = new HashSet<>();
 
@@ -61,6 +63,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.tipo == UserType.ADMIN) {
+            System.out.println(createdEvents);
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         } else {
             return List.of(new SimpleGrantedAuthority("ROLE_USER"));
@@ -91,4 +94,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

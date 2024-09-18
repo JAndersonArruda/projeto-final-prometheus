@@ -1,23 +1,27 @@
 package com.prometheus.projeto_final_prometheus.service;
 
+import com.prometheus.projeto_final_prometheus.dto.UserResponseDTO;
 import com.prometheus.projeto_final_prometheus.model.User;
 import com.prometheus.projeto_final_prometheus.model.UserType;
 import com.prometheus.projeto_final_prometheus.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import java.util.stream.Collectors;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EventService eventService;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -42,4 +46,34 @@ public class UserService {
         return tokenService.generateToken(user);
     }
 
+    public UserResponseDTO toUserDTO(User user) {
+        UserResponseDTO userResponseDTO = new UserResponseDTO(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getDtCadastro(),
+                user.getTipo().name(),
+                user.getCreatedEvents(),
+                user.getEventsAttended()
+        );
+
+        return userResponseDTO;
+    }
+
+    @Transactional
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public List<UserResponseDTO> toUserDTOList(List<User> users) {
+        return users.stream()
+                .map(user -> toUserDTO(user))
+                .collect(Collectors.toList());
+    }
+
+
+    public User findById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado com id: " + id));
+    }
 }
