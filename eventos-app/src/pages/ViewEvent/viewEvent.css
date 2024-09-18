@@ -42,13 +42,14 @@
 }
 
 .time-event {
-    padding-top: .2rem;
+    display: flex;
+    flex-direction: column;
     text-align: start;
 }
 
 .date-event {
-    display: flex;
-    flex-direction: column;
+    padding-top: .1rem;
+    text-align: start;
 }
 
 .content-description {

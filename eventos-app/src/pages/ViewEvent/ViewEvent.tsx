@@ -29,7 +29,7 @@ export default function ViewEvent() {
                 </div>
                 <div className="content-data">
                     <p className="location">{pathEvent?.localEvent}</p>
-                    <p className="time-event">{timeEvent} <span className="date-event">{dateEvent}</span></p>
+                    <p className="time-event">{timeEvent}<span className="date-event">{dateEvent}</span></p>
                 </div>
                 <div className="content-description">
                     {pathEvent?.description?.split("\n").map((paragraph, index) => (

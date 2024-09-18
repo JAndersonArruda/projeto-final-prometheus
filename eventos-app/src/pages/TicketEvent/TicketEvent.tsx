@@ -2,17 +2,31 @@
 
 import "./ticketEvent.css"
 
+import { ArrayTest } from "../../service/ArrayDados"
+
 
 export default function TicketEvent() {
+    const pathID = 1;
+    const pathEvent = ArrayTest.find(element => element.id === pathID);
+
+    const dateEvent = pathEvent?.dateTime.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
+    const timeEvent = pathEvent?.dateTime.toLocaleTimeString([], {
+        hour: "2-digit", 
+        minute: "2-digit"
+    });
     return (
         <>
             <div id="container-page" className="container-ticket">
                 <form action="" className="form-ticket">
                     <div className="data-event">
-                        <h3>Titulo do Evento</h3>
+                        <h3>{pathEvent?.title}</h3>
                         <div className="content-data-event">
-                            <p className="data-event-location">Local</p>
-                            <p className="data-event-date">Data<span className="data-event-time">Hora</span></p>
+                            <p className="data-event-location">{pathEvent?.localEvent}</p>
+                            <p className="data-event-time">{timeEvent}<span className="data-event-date">{dateEvent}</span></p>
                         </div>
                     </div>
                     <div className="element-ticket">
