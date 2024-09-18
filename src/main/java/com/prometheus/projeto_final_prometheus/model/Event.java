@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,6 +56,9 @@ public class Event {
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> participants = new HashSet<>();
+
+    @OneToMany(mappedBy = "event")
+    private Set<Certificates> certificatesIssued = new HashSet<>();
 
     public Event(String title, String description, String location, LocalDateTime eventDate, User creator) {
         this.title = title;

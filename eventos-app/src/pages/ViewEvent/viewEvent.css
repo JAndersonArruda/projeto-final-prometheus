@@ -1,0 +1,76 @@
+.container-view-event {
+    background-color: #fff;
+    padding: 3rem 1rem;
+    margin: 0 25rem;
+}
+
+.content-image {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.content-title, .content-data, .content-description {
+    margin: 0 1rem;
+}
+
+.content-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-bottom: .5rem;
+}
+
+.content-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0 .5rem;
+}
+
+.location {
+    text-align: justify;
+}
+
+.date-event {
+    display: flex;
+    flex-direction: column;
+}
+
+.time-event {
+    padding-top: .2rem;
+}
+
+.content-description {
+    text-align: start;
+    padding: 1rem 0 3.5rem;
+}
+
+.content-description p {
+    margin: .5rem 0;
+    line-height: 1.5;
+    text-align: justify;
+    text-indent: 1.5rem;
+}
+
+.button-ticket {
+    background-color: #000;
+    color: #fff;
+    padding: .8rem 2rem;
+    border: 0;
+    border-radius: .5rem;
+}
+
+.button-ticket:hover {
+    cursor: pointer;
+}
+
+.button-ticket:active {
+    transform: scale(0.95); 
+    background-color: #1c1c1c; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

@@ -48,6 +48,9 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "participants")
     private Set<Event> eventsAttended = new HashSet<>();
 
+    @OneToMany(mappedBy = "user")
+    private Set<Certificates> certificates = new HashSet<>();
+
     public User(String username, String email, String password, UserType userType) {
         this.username = username;
         this.email = email;
