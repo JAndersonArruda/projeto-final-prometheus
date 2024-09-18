@@ -11,6 +11,8 @@ function Sidebar() {
             <li><Link to={"/profile"}>Perfil</Link></li>
             <li><Link to={"/ticket-event"}>Inscrição</Link></li>
             <li><Link to={"/events/view"}>View Eventos</Link></li>
+            <li><Link to={"/events/criate"}>Criar Evento</Link></li>
+            <li><Link to={"/events/edit/1"}>Editar Evento</Link></li>
         </ul>
     )
 }
