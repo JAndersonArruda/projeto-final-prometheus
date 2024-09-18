@@ -5,18 +5,16 @@ import com.prometheus.projeto_final_prometheus.model.Event;
 import com.prometheus.projeto_final_prometheus.model.User;
 import com.prometheus.projeto_final_prometheus.repository.EventRepository;
 import com.prometheus.projeto_final_prometheus.service.EventService;
-import com.prometheus.projeto_final_prometheus.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/events")
@@ -67,6 +65,36 @@ public class EventController {
         try {
             eventService.editEvent(data.title(), data.description(), data.location(), data.eventDate(), id);
             return ResponseEntity.ok("Event edited successfully");
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    /*
+    @PostMapping("/delete")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity deleteEventById(@RequestBody IdDTO data) {
+        try{
+            if(eventService.deleteEvent(data.id())){
+                return ResponseEntity.ok("Event deleted successfully");
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    */
+
+    @PostMapping("/delete")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity deleteEventById(@RequestParam(value = "id") Long id) {
+        try{
+            if(eventService.deleteEventById(id)){
+                return ResponseEntity.ok("Event deleted successfully");
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
         }
         catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

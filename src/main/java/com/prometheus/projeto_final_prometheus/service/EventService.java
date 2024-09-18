@@ -6,6 +6,7 @@ import com.prometheus.projeto_final_prometheus.repository.EventRepository;
 import com.prometheus.projeto_final_prometheus.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -54,5 +55,13 @@ public class EventService {
         selectedEvent.setUpdatedAt(LocalDateTime.now());
 
         eventRepository.save(selectedEvent);
+    }
+
+    public boolean deleteEventById(Long eventId){
+        if(getEventsById(eventId).isPresent()){
+            eventRepository.deleteById(eventId);
+            return true;
+        }
+        return false;
     }
 }
