@@ -59,6 +59,16 @@ export default function FormUser({ modo, value }: FormUserProps) {
                             <label htmlFor="confirm-senha">Confirmar Senha</label>
                             <input id="confirm-senha-imput" type="password" name="confirm-senha" placeholder="Confirmar Senha" required />
                         </div>
+                        <div className="element-type-user">
+                            <div className="element-type-input">
+                                <input id="type-user-imput" type="radio" name="user-mode" required />
+                                <label htmlFor="type-user-imput">User</label>
+                            </div>
+                            <div className="element-type-input">
+                                <input id="type-adm-imput" type="radio" name="user-mode" required />
+                                <label htmlFor="type-adm-imput">Admin</label>
+                            </div>
+                        </div>
                     </>
                 ): null}
                 <div className="element-submit-user">
