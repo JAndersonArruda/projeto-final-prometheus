@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -36,5 +37,22 @@ public class EventService {
     @Transactional
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
+    }
+
+    public Optional<Event> getEventsById(Long EventId) {
+        return eventRepository.findEventsById(EventId);
+    }
+
+    public void editEvent(String title, String description, String location, LocalDateTime eventDate, Long EventId) {
+        Event selectedEvent = getEventsById(EventId)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+
+        selectedEvent.setTitle(title);
+        selectedEvent.setDescription(description);
+        selectedEvent.setLocation(location);
+        selectedEvent.setEventDate(eventDate);
+        selectedEvent.setUpdatedAt(LocalDateTime.now());
+
+        eventRepository.save(selectedEvent);
     }
 }
