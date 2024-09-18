@@ -34,6 +34,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/events/create").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/events").permitAll()
                         .requestMatchers(HttpMethod.GET, "/events/id/*").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/events/join").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/events/leave").permitAll()
                         .requestMatchers(HttpMethod.POST, "/events/edit/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/events/delete").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/events/user/*/events").permitAll()

@@ -49,6 +49,7 @@ public class Event {
     @JoinColumn(name = "creator_id", nullable = false)
     private User creator;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
         name = "event_participants",

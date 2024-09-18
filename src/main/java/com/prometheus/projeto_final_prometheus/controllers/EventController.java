@@ -1,6 +1,7 @@
 package com.prometheus.projeto_final_prometheus.controllers;
 
 import com.prometheus.projeto_final_prometheus.dto.EventDTO;
+import com.prometheus.projeto_final_prometheus.dto.IdDTO;
 import com.prometheus.projeto_final_prometheus.model.Event;
 import com.prometheus.projeto_final_prometheus.model.User;
 import com.prometheus.projeto_final_prometheus.repository.EventRepository;
@@ -13,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,12 +73,11 @@ public class EventController {
         }
     }
 
-    /*
     @PostMapping("/delete")
     @Secured("ROLE_ADMIN")
     public ResponseEntity deleteEventById(@RequestBody IdDTO data) {
         try{
-            if(eventService.deleteEvent(data.id())){
+            if(eventService.deleteEventById(data.id())){
                 return ResponseEntity.ok("Event deleted successfully");
             }
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
@@ -85,16 +86,41 @@ public class EventController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    */
 
-    @PostMapping("/delete")
-    @Secured("ROLE_ADMIN")
-    public ResponseEntity deleteEventById(@RequestParam(value = "id") Long id) {
-        try{
-            if(eventService.deleteEventById(id)){
-                return ResponseEntity.ok("Event deleted successfully");
+    @PostMapping("/join")
+    public ResponseEntity joinEvent(@RequestBody IdDTO data) {
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            Long participantId = ((User) auth.getPrincipal()).getId();
+
+            if(eventService.insertParticipant(data.id(), participantId)){
+                return ResponseEntity.ok("User joined event successfully");
             }
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
+
+        }
+        catch (ClassCastException e){
+            return ResponseEntity.badRequest().body("User cannot join an event without being logged in");
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/leave")
+    public ResponseEntity leaveEvent(@RequestBody IdDTO data) {
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            Long participantId = ((User) auth.getPrincipal()).getId();
+
+            if(eventService.leaveEvent(data.id(), participantId)){
+                return ResponseEntity.ok("User leaved event successfully");
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
+
+        }
+        catch (ClassCastException e){
+            return ResponseEntity.badRequest().body("User cannot leave an event without being logged in");
         }
         catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

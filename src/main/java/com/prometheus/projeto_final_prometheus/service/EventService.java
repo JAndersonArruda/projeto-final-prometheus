@@ -64,4 +64,51 @@ public class EventService {
         }
         return false;
     }
+
+    @Transactional
+    public void createEventWithParticipants(Event event, List<Long> userIds) {
+        // Persistir o evento
+        Event savedEvent = eventRepository.save(event);
+
+        // Adicionar os usuários participantes
+        for (Long userId : userIds) {
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+            savedEvent.getParticipants().add(user);
+        }
+
+        // Salvar as alterações no evento com participantes
+        eventRepository.save(savedEvent);
+    }
+
+    @Transactional
+    public boolean insertParticipant(Long eventId, Long userId) {
+        if(getEventsById(eventId).isPresent()) {
+            Event selectedEvent = getEventsById(eventId).get();
+
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+            selectedEvent.getParticipants().add(user);
+
+            // Salvar as alterações no evento com participantes
+            eventRepository.save(selectedEvent);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean leaveEvent(Long eventId, Long userId) {
+        if(getEventsById(eventId).isPresent()) {
+            Event selectedEvent = getEventsById(eventId).get();
+
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+            selectedEvent.getParticipants().remove(user);
+
+            eventRepository.save(selectedEvent);
+            return true;
+        }
+        return false;
+    }
 }
