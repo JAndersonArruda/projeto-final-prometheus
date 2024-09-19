@@ -19,7 +19,7 @@ function CertificateItem({ name, date, timeLine } : CertificateItemProps) {
     return (
         <div className="container-certificate">
             <div className="content-icon">
-                <img className="image-certificate" src="" alt="icone de certificado" />
+                <img className="image-certificate" src="https://cdn.icon-icons.com/icons2/2735/PNG/512/certificate_icon_175697.png" alt="icone de certificado" />
             </div>
             <div className="content-info">
                 <p className="name-event">{name}</p>

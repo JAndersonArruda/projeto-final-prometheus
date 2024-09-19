@@ -27,27 +27,27 @@ export default function Profile() {
                             <h3>Certificados</h3>
                             <div className="certificate">
                                 <CertificateItem
-                                    name={"Evento 00371291173"}
+                                    name={"Certificado 00371291173"}
                                     date={"20/10/2024"}
                                     timeLine={"3:00"}
                                 />
                                 <CertificateItem
-                                    name={"Evento 00371291173"}
+                                    name={"Certificado 00371291173"}
                                     date={"20/10/2024"}
                                     timeLine={"3:00"}
                                 />
                                 <CertificateItem
-                                    name={"Evento 00371291173"}
+                                    name={"Certificado 00371291173"}
                                     date={"20/10/2024"}
                                     timeLine={"3:00"}
                                 />
                                 <CertificateItem
-                                    name={"Evento 00371291173"}
+                                    name={"Certificado 00371291173"}
                                     date={"20/10/2024"}
                                     timeLine={"3:00"}
                                 />
                                 <CertificateItem
-                                    name={"Evento 00371291173"}
+                                    name={"Certificado 00371291173"}
                                     date={"20/10/2024"}
                                     timeLine={"3:00"}
                                 />
