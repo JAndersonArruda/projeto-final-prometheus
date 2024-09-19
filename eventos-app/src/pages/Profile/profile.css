@@ -1,0 +1,31 @@
+.container-profile {
+    display: flex;
+    flex-direction: column;
+    min-width: 100vh;
+    background-color: #fff;
+}
+
+.area-profile {
+    flex: 1;
+}
+
+.content-data-personal, .content-data-certificate {
+    margin: 2rem 2rem;
+    
+    /* background-color: #f4f4f4;
+    margin: 2rem 3rem;
+    border-radius: .5rem; */
+}
+
+.image-prifile {
+    width: 10%;
+    border-radius: 20rem;
+}
+
+
+
+
+.certificate {
+    display: flex;
+    flex-wrap: wrap;
+}
