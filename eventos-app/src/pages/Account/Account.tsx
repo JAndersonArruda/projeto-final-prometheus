@@ -19,7 +19,7 @@ export default function Account() {
         <>
             <div className="container-account">
                 <div className="container-title">
-                    <h2>Eventos</h2>
+                    <h2 className="titulo-form-account">Eventos</h2>
                 </div>
                 <FormUser 
                     modo={action}

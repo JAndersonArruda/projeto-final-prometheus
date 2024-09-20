@@ -46,3 +46,30 @@
 .container-link a {
     color: #726d6d;
 }
+
+
+@media (max-width: 900px) {
+    .container-title, .container-link {
+        width: 50%;
+    }
+}
+
+@media (max-width: 451px) {
+    .container-title, .container-link {
+        width: 70%;
+    }
+
+    .container-title, .container-link, .form-user{
+        -webkit-box-shadow: 0px 0px;
+        -moz-box-shadow: 0px 0px;
+        box-shadow: 0px 0px;
+    }
+
+    .titulo-form-account {
+        font-size: 20px;
+    }
+
+    .container-link p, .container-link a {
+        font-size: 13px;
+    }
+}
