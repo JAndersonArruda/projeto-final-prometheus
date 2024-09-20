@@ -5,18 +5,20 @@ import com.prometheus.projeto_final_prometheus.dto.LoginResponseDTO;
 import com.prometheus.projeto_final_prometheus.dto.RegisterDTO;
 import com.prometheus.projeto_final_prometheus.model.User;
 import com.prometheus.projeto_final_prometheus.repository.UserRepository;
+import com.prometheus.projeto_final_prometheus.service.FileStorageService;
 import com.prometheus.projeto_final_prometheus.service.TokenService;
 import com.prometheus.projeto_final_prometheus.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/auth")
@@ -29,6 +31,8 @@ public class AuthenticationController {
     TokenService tokenService;
     @Autowired
     UserService userService;
+    @Autowired
+    private FileStorageService fileStorageService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationDTO data) {
@@ -40,10 +44,13 @@ public class AuthenticationController {
         }
     }
 
-    @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterDTO data) {
+    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity register(
+            @ModelAttribute("file") MultipartFile file,
+            @ModelAttribute RegisterDTO data) throws IOException {
         try {
-            userService.register(data.username(), data.email(), data.password(), data.tipo());
+            String fileName = fileStorageService.storeFile(file);
+            userService.register(data.username(), data.email(), data.password(), data.tipo(), fileName);
             return ResponseEntity.ok("User registered successfully");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

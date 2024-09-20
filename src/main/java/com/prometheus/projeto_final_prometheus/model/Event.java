@@ -61,12 +61,16 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private Set<Certificates> certificatesIssued = new HashSet<>();
 
-    public Event(String title, String description, String location, LocalDateTime eventDate, User creator) {
+    @Column(name = "event_image")
+    private String eventImage;
+
+    public Event(String title, String description, String location, LocalDateTime eventDate, User creator, String file) {
         this.title = title;
         this.description = description;
         this.location = location;
         this.eventDate = eventDate;
         this.creator = creator;
+        this.eventImage = file;
     }
 
 

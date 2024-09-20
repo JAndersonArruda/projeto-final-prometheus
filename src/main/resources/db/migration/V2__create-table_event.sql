@@ -7,6 +7,7 @@ CREATE TABLE events (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     creator_id INTEGER NOT NULL,
+    event_image VARCHAR(255),
     CONSTRAINT eventsPK PRIMARY KEY(id),
     CONSTRAINT creatorFK FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE
 );

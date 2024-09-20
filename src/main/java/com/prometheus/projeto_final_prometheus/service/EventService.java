@@ -1,5 +1,6 @@
 package com.prometheus.projeto_final_prometheus.service;
 
+import com.prometheus.projeto_final_prometheus.model.Certificates;
 import com.prometheus.projeto_final_prometheus.model.Event;
 import com.prometheus.projeto_final_prometheus.model.User;
 import com.prometheus.projeto_final_prometheus.repository.EventRepository;
@@ -7,6 +8,8 @@ import com.prometheus.projeto_final_prometheus.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,11 +24,11 @@ public class EventService {
     @Autowired
     private UserRepository userRepository;
 
-    public void createEvent(String title, String description, String location, LocalDateTime eventDate, Long creatorId) {
+    public void createEvent(String title, String description, String location, LocalDateTime eventDate, Long creatorId, String file) {
         User creator = userRepository.findById(creatorId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Event newEvent = new Event(title, description, location, eventDate, creator);
+        Event newEvent = new Event(title, description, location, eventDate, creator, file);
 
         eventRepository.save(newEvent);
     }

@@ -1,4 +1,4 @@
-package com.prometheus.projeto_final_prometheus;
+package com.prometheus.projeto_final_prometheus.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

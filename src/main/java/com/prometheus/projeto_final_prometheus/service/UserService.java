@@ -10,6 +10,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.stream.Collectors;
 
 import java.util.List;
@@ -27,13 +29,13 @@ public class UserService {
     @Autowired
     TokenService tokenService;
 
-    public void register(String username, String email, String password, UserType tipo) {
+    public void register(String username, String email, String password, UserType tipo, String file) {
         if (userRepository.findByEmail(email) != null) {
             throw new IllegalArgumentException("E-mail already registered");
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(password);
-        User newUser = new User(username, email, encryptedPassword, tipo);
+        User newUser = new User(username, email, encryptedPassword, tipo, file);
 
         userRepository.save(newUser);
     }
@@ -53,6 +55,7 @@ public class UserService {
                 user.getEmail(),
                 user.getDtCadastro(),
                 user.getTipo().name(),
+                user.getProfileImage(),
                 user.getCreatedEvents(),
                 user.getEventsAttended()
         );

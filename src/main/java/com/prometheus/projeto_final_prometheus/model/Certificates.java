@@ -14,13 +14,9 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@IdClass(CertificateId.class)
 @Table(name = "certificates")
 public class Certificates {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
     @Column(name = "nome", nullable = false, length = 255)
     private String name;
 
@@ -33,10 +29,12 @@ public class Certificates {
     @Column(name = "codigo_validacao", nullable = false, unique = true, length = 255)
     private String validationCode;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "usuario", nullable = false)
     private User user;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "evento", nullable = false)
     private Event event;

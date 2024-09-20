@@ -5,7 +5,10 @@ import com.prometheus.projeto_final_prometheus.dto.IdDTO;
 import com.prometheus.projeto_final_prometheus.model.Event;
 import com.prometheus.projeto_final_prometheus.model.User;
 import com.prometheus.projeto_final_prometheus.repository.EventRepository;
+import com.prometheus.projeto_final_prometheus.repository.UserRepository;
+import com.prometheus.projeto_final_prometheus.service.CertificatesService;
 import com.prometheus.projeto_final_prometheus.service.EventService;
+import com.prometheus.projeto_final_prometheus.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +16,9 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,15 +30,25 @@ public class EventController {
     private EventService eventService;
     @Autowired
     private EventRepository eventRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CertificatesService certificatesService;
+    @Autowired
+    private FileStorageService fileStorageService;
 
     @PostMapping("/create")
     @Secured("ROLE_ADMIN")
-    public ResponseEntity createEvent(@RequestBody EventDTO data) {
+    public ResponseEntity createEvent(
+            @ModelAttribute EventDTO data,
+            @ModelAttribute("file") MultipartFile file
+            ) throws IOException {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             Long creatorId = ((User) auth.getPrincipal()).getId();
 
-            eventService.createEvent(data.title(), data.description(), data.location(), data.eventDate(), creatorId);
+            String fileName = fileStorageService.storeFile(file);
+            eventService.createEvent(data.title(), data.description(), data.location(), data.eventDate(), creatorId, fileName);
 
             return ResponseEntity.ok("Event registered successfully");
         } catch (IllegalArgumentException e) {
@@ -126,4 +141,22 @@ public class EventController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/{eventId}/issue-certificates")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<Void> issueCertificates(@PathVariable Long eventId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User currentUser = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("Evento não encontrado"));
+
+
+
+        certificatesService.issueCertificatesForEvent(event, currentUser);
+        return ResponseEntity.ok().build();
+    }
+
 }

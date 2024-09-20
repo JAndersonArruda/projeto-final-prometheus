@@ -41,6 +41,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private UserType tipo;
 
+    @Column(name = "profile_image")
+    private String profileImage;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "creator")
     private Set<Event> createdEvents = new HashSet<>();
@@ -51,11 +54,12 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Certificates> certificates = new HashSet<>();
 
-    public User(String username, String email, String password, UserType userType) {
+    public User(String username, String email, String password, UserType userType, String file) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.tipo = userType;
+        this.profileImage = file;
     }
 
     @PrePersist

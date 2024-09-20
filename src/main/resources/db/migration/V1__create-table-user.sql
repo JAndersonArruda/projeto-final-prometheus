@@ -7,5 +7,6 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     dt_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipo user_type,
+    profile_image VARCHAR(255),
     CONSTRAINT usersPK PRIMARY KEY(id)
 );
