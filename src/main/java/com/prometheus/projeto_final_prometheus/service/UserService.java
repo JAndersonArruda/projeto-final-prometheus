@@ -76,4 +76,12 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
         return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado com id: " + id));
     }
+
+    public boolean deleteByEmail(String email){
+        if(userRepository.existsByEmail(email)){
+            userRepository.deleteByEmail(email);
+            return true;
+        }
+        return false;
+    }
 }
