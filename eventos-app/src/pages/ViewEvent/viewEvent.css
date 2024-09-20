@@ -1,7 +1,7 @@
 .container-view-event {
     background-color: #fff;
     padding: 2rem 1rem;
-    margin: 0 25rem;
+    margin: 0 calc((100vw - 50rem)/2);
 }
 
 .content-image {
@@ -35,6 +35,7 @@
     align-items: center;
     margin-bottom: 1rem;
     padding: 0 .5rem;
+    font-size: 14px;
 }
 
 .location {
@@ -80,4 +81,37 @@
     transform: scale(0.95); 
     background-color: #1c1c1c; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+@media (max-width: 901px) {
+    .container-view-event {
+        margin: 0 calc((100vw - 40rem)/2);
+    }
+
+    .content-title {
+        font-size: 16.5px;
+    }
+
+    .content-data {
+        font-size: 13px;
+    }
+
+    .content-description {
+        font-size: 15.5px;
+    }
+
+    .button-ticket {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 451px) {
+    .container-view-event {
+        margin: 0;
+    }
+
+    .content-data {
+        font-size: 12px;
+    }
 }
