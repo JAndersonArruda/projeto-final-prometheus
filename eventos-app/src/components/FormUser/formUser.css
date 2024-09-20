@@ -94,12 +94,12 @@
         width: 70%;
     }
 
-    .element-user label, .element-type-input label{
+    .element-user label, .element-type-input label, .element-submit-user input {
         font-size: 14px;
     }
 
-    .element-user input, .element-submit-user input {
-        font-size: 13px
+    .element-user input {
+        font-size: 12px
     }
 
     .element-type-input input {
