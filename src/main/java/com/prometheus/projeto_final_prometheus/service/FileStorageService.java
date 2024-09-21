@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,7 +32,6 @@ public class FileStorageService {
     }
 
     public String storeFile(MultipartFile file) throws IOException {
-        System.out.println(file);
         if (file.isEmpty()) {
             throw new IllegalArgumentException("File is empty");
         }
@@ -43,10 +43,24 @@ public class FileStorageService {
 
             file.transferTo(targetLocation);
 
-            return fileName;
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/files/")
+                    .path(fileName)
+                    .toUriString();
+
+            return fileDownloadUri;
         } catch (IOException ex) {
             throw new IOException("Could not store file " + fileName + ". Please try again!", ex);
         }
     }
 
+    public String getAbsolutePath(String fileName) {
+        if (fileName == null || fileName.isEmpty()) {
+            throw new IllegalArgumentException("File name cannot be null or empty");
+        }
+
+        Path filePath = fileStorageLocation.resolve(fileName).toAbsolutePath();
+
+        return filePath.toString();
+    }
 }

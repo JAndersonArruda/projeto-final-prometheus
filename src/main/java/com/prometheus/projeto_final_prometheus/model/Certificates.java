@@ -1,5 +1,6 @@
 package com.prometheus.projeto_final_prometheus.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,11 +32,13 @@ public class Certificates {
 
     @Id
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "usuario", nullable = false)
     private User user;
 
     @Id
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "evento", nullable = false)
     private Event event;
 }

@@ -1,5 +1,6 @@
 package com.prometheus.projeto_final_prometheus.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -48,9 +49,11 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "creator")
     private Set<Event> createdEvents = new HashSet<>();
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "participants")
     private Set<Event> eventsAttended = new HashSet<>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "user")
     private Set<Certificates> certificates = new HashSet<>();
 

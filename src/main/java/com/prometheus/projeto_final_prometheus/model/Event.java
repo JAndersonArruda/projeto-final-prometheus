@@ -58,6 +58,7 @@ public class Event {
     )
     private Set<User> participants = new HashSet<>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "event")
     private Set<Certificates> certificatesIssued = new HashSet<>();
 

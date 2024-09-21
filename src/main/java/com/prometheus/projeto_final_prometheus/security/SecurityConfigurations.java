@@ -39,6 +39,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/events/edit/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/events/delete").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/events/user/*/events").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/files/*").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
