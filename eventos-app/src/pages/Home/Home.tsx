@@ -7,13 +7,13 @@ import Footer from "../../components/Footer/Footer";
 import { getEventos } from "../../service/eventAPI.ts";
 import {useEffect, useState} from "react";
 import ModalEvent from "../../components/ModalEvent/ModalEvent.tsx";
+import ViewEvent from "../ViewEvent/ViewEvent.tsx";
 
 export default function Home() {
-    const [eventos, setEventos] = useState([]); // Estado para armazenar os eventos
-    const [loading, setLoading] = useState(true); // Estado para controle de loading
+    const [eventos, setEventos] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [showModal, setShowModal] = useState(false); // Estado para controle do modal
-    const [modalMode, setModalMode] = useState("create"); // Estado para definir o modo do modal
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
     useEffect(() => {
         const fetchEventos = async () => {
@@ -30,21 +30,12 @@ export default function Home() {
         fetchEventos();
     }, []);
 
-    // Função para abrir o modal com o modo "Criar"
-    const handleCreateEvent = () => {
-        setModalMode("create");
-        setShowModal(true);
+    const handleEventClick = (event) => {
+        setSelectedEvent(event); // Armazena o evento clicado
     };
 
-    // Função para fechar o modal
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
-
-    // Função chamada ao submeter o formulário de criação/edição
-    const handleSaveEvent = () => {
-        // Lógica para salvar o evento...
-        setShowModal(false); // Fecha o modal ao salvar
+    const handleCloseView = () => {
+        setSelectedEvent(null); // Reseta o evento selecionado ao fechar
     };
 
     if (loading) {
@@ -57,30 +48,34 @@ export default function Home() {
 
     return (
         <>
-            <Header onCreateEvent={handleCreateEvent} />
+            <Header />
             <div id="container-page" className="container-home">
-                {showModal && (
-                    <ModalEvent modo={modalMode} onSave={handleSaveEvent} onClose={handleCloseModal} />
+                {selectedEvent ? (
+                    <ViewEvent event={selectedEvent} onClose={handleCloseView} />
+                ) : (
+                    <div>
+                        <div className="container-cards-event">
+                            {eventos.length > 0 ? (
+                                eventos.map((eventDate) => (
+                                    <CardEvent
+                                        key={eventDate.id}
+                                        id={eventDate.id}
+                                        title={eventDate.title}
+                                        image={eventDate.eventImage}
+                                        dateTime={eventDate.eventDate}
+                                        localEvent={eventDate.location}
+                                        onClick={() => handleEventClick(eventDate)} // Chama a função ao clicar
+                                    />
+                                ))
+                            ) : (
+                                <p>Nenhum evento disponível.</p>
+                            )}
+                        </div>
+                        <div className="area-home">
+                            <Footer />
+                        </div>
+                    </div>
                 )}
-                <div className="container-cards-event">
-                    {eventos.length > 0 ? (
-                        eventos.map((eventDate) => (
-                            <CardEvent
-                                key={eventDate.id}
-                                id={eventDate.id}
-                                title={eventDate.title}
-                                image={eventDate.eventImage}
-                                dateTime={eventDate.eventDate}
-                                localEvent={eventDate.location}
-                            />
-                        ))
-                    ) : (
-                        <p>Nenhum evento disponível.</p>
-                    )}
-                </div>
-                <div className="area-home">
-                    <Footer />
-                </div>
             </div>
         </>
     );
