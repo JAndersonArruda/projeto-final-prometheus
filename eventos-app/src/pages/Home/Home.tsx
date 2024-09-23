@@ -3,8 +3,9 @@ import "./home.css";
 import Header from "../../components/Header/Header";
 import CardEvent from "../../components/Card/CardEvent";
 import Footer from "../../components/Footer/Footer";
-import { getEventos } from "../../service/apiService.ts";
-import { useEffect, useState } from "react";
+
+import { getEventos } from "../../service/eventAPI.ts";
+import {useEffect, useState} from "react";
 import ModalEvent from "../../components/ModalEvent/ModalEvent.tsx";
 
 export default function Home() {

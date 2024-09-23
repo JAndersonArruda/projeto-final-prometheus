@@ -3,6 +3,9 @@
 import { useNavigate } from "react-router-dom"
 import "./formUser.css"
 
+import { login, register} from "../../service/authenticationAPI.ts";
+import * as React from "react";
+
 interface FormUserProps {
     modo: string,
     value: string 
@@ -10,12 +13,24 @@ interface FormUserProps {
 
 export default function FormUser({ modo, value }: FormUserProps) {
     const navigate = useNavigate();
-    const handleSubmit = () => {
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
         if (value === "Entrar") {
-            const userName = document.querySelector<HTMLInputElement>("#username-imput");
+            const email = document.querySelector<HTMLInputElement>("#email-imput");
             const senha = document.querySelector<HTMLInputElement>("#senha-imput");
 
-            if (userName?.value && senha?.value) navigate("/events");
+            if (email?.value && senha?.value) {
+                try {
+                    const response = await login(email.value, senha.value);
+                    console.log(response);
+                    navigate("/events");
+                } catch (error: any) {
+                    console.error("Error details:", error);
+                    alert(error.message || "Erro ao fazer login");
+                }
+            }
         }
         else if (value === "Salvar") {
             const userName = document.querySelector<HTMLInputElement>("#username-imput");
@@ -23,7 +38,26 @@ export default function FormUser({ modo, value }: FormUserProps) {
             const senha = document.querySelector<HTMLInputElement>("#senha-imput");
             const confirm  = document.querySelector<HTMLInputElement>("#confirm-senha-imput");
 
-            if (userName?.value && email?.value && senha?.value && confirm?.value) navigate("/account/login");
+            if (userName?.value && email?.value && senha?.value && confirm?.value) {
+                // if (senha.value !== confirm.value) {
+                //     alert("As senhas não coincidem");
+                //     return;
+                // }
+                //
+                // const formData = new FormData();
+                // formData.append('username', userName.value);
+                // formData.append('email', email.value);
+                // formData.append('password', senha.value);
+                //
+                // try {
+                //     const response = await register(formData);
+                //     console.log(response);
+                //     navigate("/account/login");
+                // } catch (error: any) {
+                //     alert(error.response?.data || "Erro ao registrar");
+                // }
+                navigate("/account/login");
+            }
         }
     }
 
@@ -33,8 +67,8 @@ export default function FormUser({ modo, value }: FormUserProps) {
                 {modo === "login" ? (
                     <>
                         <div className="element-user">
-                            <label htmlFor="username">Usuário</label>
-                            <input id="username-imput" type="text" name="username" placeholder="Username" required />
+                            <label htmlFor="email-imput">E-mail</label>
+                            <input id="email-imput" type="email" name="email" placeholder="E-mail" required />
                         </div>
                         <div className="element-user">
                             <label htmlFor="senha">Senha</label>

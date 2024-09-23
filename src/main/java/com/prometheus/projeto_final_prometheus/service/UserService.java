@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,9 +57,9 @@ public class UserService {
                 user.getEmail(),
                 user.getDtCadastro(),
                 user.getTipo().name(),
-                user.getProfileImage(),
-                user.getCreatedEvents(),
-                user.getEventsAttended()
+                user.getProfileImage()
+                //user.getCreatedEvents(),
+                //user.getEventsAttended()
         );
 
         return userResponseDTO;
@@ -67,6 +69,13 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    public UserResponseDTO getLoggedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) auth.getPrincipal();
+        return toUserDTO(user);
+    }
+
 
     public List<UserResponseDTO> toUserDTOList(List<User> users) {
         return users.stream()

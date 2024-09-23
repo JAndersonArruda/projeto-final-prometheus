@@ -11,8 +11,8 @@ public record UserResponseDTO(
         String email,
         LocalDateTime dtCadastro,
         String tipo,
-        String file,
-        Set<Event> createdEvents,
-        Set<Event> eventsAttended
+        String file
+        //Set<Event> createdEvents,
+        //Set<Event> eventsAttended
         ) {
 }
