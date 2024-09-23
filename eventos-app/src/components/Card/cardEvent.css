@@ -24,3 +24,23 @@
     border-radius: .5rem .5rem 0 0;
     box-sizing: border-box;
 }
+
+.card-event-body {
+    width: 100%;
+    padding: .5rem 0;
+}
+
+.card-event-body h2 {
+    text-align: justify;
+}
+
+.date-time-card {
+    padding: .5rem 0 0;
+}
+
+.date-time-card, .card-event p {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 15px;
+}
