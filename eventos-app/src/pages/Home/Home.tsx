@@ -77,7 +77,9 @@ export default function Home() {
                         <p>Nenhum evento disponível.</p>
                     )}
                 </div>
-                <Footer />
+                <div className="area-home">
+                    <Footer />
+                </div>
             </div>
         </>
     );
