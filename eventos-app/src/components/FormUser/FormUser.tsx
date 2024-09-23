@@ -37,26 +37,39 @@ export default function FormUser({ modo, value }: FormUserProps) {
             const email = document.querySelector<HTMLInputElement>("#email-imput");
             const senha = document.querySelector<HTMLInputElement>("#senha-imput");
             const confirm  = document.querySelector<HTMLInputElement>("#confirm-senha-imput");
+            const inputFoto = document.querySelector<HTMLInputElement>("#file-input");
 
-            if (userName?.value && email?.value && senha?.value && confirm?.value) {
-                // if (senha.value !== confirm.value) {
-                //     alert("As senhas não coincidem");
-                //     return;
-                // }
-                //
-                // const formData = new FormData();
-                // formData.append('username', userName.value);
-                // formData.append('email', email.value);
-                // formData.append('password', senha.value);
-                //
-                // try {
-                //     const response = await register(formData);
-                //     console.log(response);
-                //     navigate("/account/login");
-                // } catch (error: any) {
-                //     alert(error.response?.data || "Erro ao registrar");
-                // }
-                navigate("/account/login");
+            const opcoesUsuario = document.querySelector<HTMLInputElement>('input[name="user-mode"]:checked');
+
+            // Determinando o valor de userType
+            let tipoUsuario = "";
+            if (opcoesUsuario) {
+                tipoUsuario = opcoesUsuario.id === "type-adm-imput" ? "ADMIN" : 
+                opcoesUsuario.id === "type-user-imput" ? "USER" : "";
+            }
+
+            if (userName?.value && email?.value && senha?.value && confirm?.value && inputFoto?.files?.length && tipoUsuario) {
+                if (senha.value !== confirm.value) {
+                    alert("As senhas não coincidem");
+                    return;
+                }
+                
+                const foto = inputFoto.files[0];
+                const formData = new FormData();
+                formData.append('username', userName.value);
+                formData.append('email', email.value);
+                formData.append('password', senha.value);
+            
+                try {
+                    const response = await register(userName.value, email.value, senha.value, tipoUsuario, foto);
+                    console.log(response);
+                    navigate("/account/login");
+                } catch (error: any) {
+                    alert(error.response?.data || "Erro ao registrar usuario.");
+                }
+            }
+            else{
+                alert("Por favor, preencha todos os campos");
             }
         }
     }
@@ -92,6 +105,10 @@ export default function FormUser({ modo, value }: FormUserProps) {
                         <div className="element-user">
                             <label htmlFor="confirm-senha">Confirmar Senha</label>
                             <input id="confirm-senha-imput" type="password" name="confirm-senha" placeholder="Confirmar Senha" required />
+                        </div>
+                        <div className="element-user">
+                            <label htmlFor="file-input">Foto de perfil</label>
+                            <input id="file-input" type="file" name="file" accept="image/*" required />
                         </div>
                         <div className="element-type-user">
                             <div className="element-type-input">
