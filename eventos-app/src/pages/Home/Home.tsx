@@ -46,6 +46,14 @@ export default function Home() {
         return <p>Erro ao carregar eventos: {error}</p>;
     }
 
+    function handleEdit() {
+        alert('Editar foi clicado');
+    }
+
+    function handleDelete() {
+        alert('Excluir foi clicado');
+    }
+
     return (
         <>
             <Header />
@@ -65,6 +73,8 @@ export default function Home() {
                                         dateTime={eventDate.eventDate}
                                         localEvent={eventDate.location}
                                         onClick={() => handleEventClick(eventDate)} // Chama a função ao clicar
+                                        onEdit={handleEdit}
+                                        onDelete={handleDelete}
                                     />
                                 ))
                             ) : (

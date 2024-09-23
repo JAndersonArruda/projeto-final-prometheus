@@ -1,25 +1,25 @@
 .card-event {
+    position: relative; /* Para que os filhos possam ser posicionados em relação a este contêiner */
     background-color: #fff;
     color: #000;
     border-radius: .5rem;
     margin: .5rem;
     padding: .3rem .5rem;
     width: 390px;
-    height: 280px; /* Definir altura fixa */
+    /* Remover altura fixa para torná-la dinâmica */
     overflow: hidden; /* Oculta o excesso da imagem */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     box-sizing: border-box; /* Garante que o padding seja considerado no tamanho total */
-    /* width: calc(33.33% - 3rem); /* mudar a pixelagem para um card fixo depois /* */
 }
 
 .card-event img {
-    width: 100%;         /* Ajusta a largura da imagem para ocupar 100% da área disponível */
-    height: 100%;        
-    max-height: 250px;   /* Define uma altura máxima para garantir que não ultrapasse a moldura */
-    object-fit: cover;   /* Corta a imagem se necessário, sem deformar */
+    width: 100%; /* Ajusta a largura da imagem para ocupar 100% da área disponível */
+    height: auto; /* Permite que a altura da imagem se ajuste automaticamente */
+    max-height: 250px; /* Define uma altura máxima para garantir que não ultrapasse a moldura */
+    object-fit: cover; /* Corta a imagem se necessário, sem deformar */
     object-position: center; /* Centraliza a imagem */
     border-radius: .5rem .5rem 0 0;
     box-sizing: border-box;
@@ -28,6 +28,7 @@
 .card-event-body {
     width: 100%;
     padding: .5rem 0;
+    flex-grow: 1; /* Faz com que o corpo do card ocupe o espaço restante */
 }
 
 .card-event-body h2 {
@@ -43,4 +44,26 @@
     flex-direction: row;
     align-items: center;
     font-size: 15px;
+}
+
+.card-event-icons {
+    position: absolute; /* Permite que os ícones sejam posicionados sobre a imagem */
+    top: 10px; /* Ajuste a posição vertical */
+    right: 10px; /* Ajuste a posição horizontal */
+    display: flex;
+    gap: 5px; /* Espaçamento entre os ícones */
+    z-index: 1; /* Para garantir que os ícones fiquem acima da imagem */
+}
+
+.icon-button {
+    cursor: pointer; /* Muda o cursor para indicar que os ícones são clicáveis */
+    color: white; /* Cor do ícone, ajuste conforme necessário */
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo semitransparente */
+    border-radius: 50%; /* Para deixar os ícones em forma circular */
+    padding: 5px; /* Espaçamento interno para um botão mais "gordo" */
+    transition: background-color 0.3s; /* Efeito suave ao passar o mouse */
+}
+
+.icon-button:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Escurece o fundo ao passar o mouse */
 }
