@@ -4,7 +4,7 @@ import Header from "../../components/Header/Header";
 import CardEvent from "../../components/Card/CardEvent";
 import Footer from "../../components/Footer/Footer";
 
-import { getEventos } from "../../service/eventAPI.ts";
+import { deleteEvent, getEventos } from "../../service/eventAPI.ts";
 import {useEffect, useState} from "react";
 import ModalEvent from "../../components/ModalEvent/ModalEvent.tsx";
 import ViewEvent from "../ViewEvent/ViewEvent.tsx";
@@ -50,8 +50,15 @@ export default function Home() {
         alert('Editar foi clicado');
     }
 
-    function handleDelete() {
-        alert('Excluir foi clicado');
+    async function handleDelete(idEvento: bigint) {
+        //deleteEvent(idEvento);
+
+        try {
+            await deleteEvent(idEvento); // Aguarda a exclusão do evento
+            setEventos((prevEventos) => prevEventos.filter(event => event.id !== idEvento)); // Remove o evento da lista
+        } catch (error) {
+            console.error("Erro ao excluir evento:", error);
+        }
     }
 
     return (
@@ -64,17 +71,17 @@ export default function Home() {
                     <div>
                         <div className="container-cards-event">
                             {eventos.length > 0 ? (
-                                eventos.map((eventDate) => (
+                                eventos.map((event) => (
                                     <CardEvent
-                                        key={eventDate.id}
-                                        id={eventDate.id}
-                                        title={eventDate.title}
-                                        image={eventDate.eventImage}
-                                        dateTime={eventDate.eventDate}
-                                        localEvent={eventDate.location}
-                                        onClick={() => handleEventClick(eventDate)} // Chama a função ao clicar
+                                        key={event.id}
+                                        id={event.id}
+                                        title={event.title}
+                                        image={event.eventImage}
+                                        dateTime={event.eventDate}
+                                        localEvent={event.location}
+                                        onClick={() => handleEventClick(event)} // Chama a função ao clicar
                                         onEdit={handleEdit}
-                                        onDelete={handleDelete}
+                                        onDelete={() => handleDelete(event.id)}
                                     />
                                 ))
                             ) : (

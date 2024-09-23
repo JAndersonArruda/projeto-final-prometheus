@@ -43,7 +43,7 @@ export async function joinEvent(id: bigint) {
 
     if (!response.ok) {
         alert("Um erro ocorreu. Não foi possível se registrar nesse evento.");
-        throw new Error("Registro falhou");
+        throw new Error("Não foi possível registrar o usuário nesse evento");
     }
     else {
         alert("Registrado no evento com sucesso!");
@@ -65,10 +65,32 @@ export async function leaveEvent(id: bigint) {
 
     if (!response.ok) {
         alert("Um erro ocorreu. Não foi possível cancelar inscrição no evento.");
-        throw new Error("Registro falhou");
+        throw new Error("Não foi possível cancelar inscrição no evento.");
     }
     else {
         alert("Registrado no evento com sucesso!");
+    }
+
+    return response.text();
+}
+
+export async function deleteEvent(id: bigint) {
+    const token: string = localStorage.getItem("token") ?? "";
+    const response = await fetch(`${API_BASE_URL}/delete`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id }),
+    });
+
+    if (!response.ok) {
+        alert("Você não tem permissão para deletar eventos");
+        throw new Error("Usuario não tem permissão para deletar eventos");
+    }
+    else {
+        alert("Evento deletado com sucesso");
     }
 
     return response.text();
