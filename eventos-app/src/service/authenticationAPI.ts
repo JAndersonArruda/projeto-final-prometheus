@@ -10,16 +10,22 @@ export async function login(email: string, password: string) {
         body: JSON.stringify({ email, password }),
     });
 
-    console.log("Status da resposta:", response.status);
-
     if (!response.ok) {
         const errorText = await response.text();
-        console.error("Erro na resposta:", errorText);
         throw new Error("Login falhou: " + errorText);
     }
 
-    return response.json();
+    const data = await response.json();
+
+    if (data.token) {
+        localStorage.setItem('token', data.token);
+    } else {
+        throw new Error("Token não encontrado na resposta.");
+    }
+
+    return data;
 }
+
 
 
 // Função para registro de usuário

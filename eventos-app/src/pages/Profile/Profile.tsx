@@ -6,7 +6,32 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import CertificateItem from "../../components/CertificateItem/CertificateItem"
 
+import { getLoggedUser } from '../../service/userAPI.ts'
+import {useEffect, useState} from "react";
+
 export default function Profile() {
+    const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const data = await getLoggedUser();
+                setUserData(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    if (loading) {
+        return <div>Carregando...</div>;
+    }
+
     return (
         <>
             <Header />
@@ -16,16 +41,16 @@ export default function Profile() {
                         <h4 className="title-section-personal">Dados Pessoais</h4>
                         <div className="personal">
                             <div className='data-image-user'>
-                                <img className="image-prifile" src="https://i.pinimg.com/564x/57/00/c0/5700c04197ee9a4372a35ef16eb78f4e.jpg" alt="user-image" />
+                                <img className="image-prifile" src={userData?.file || "https://i.pinimg.com/564x/57/00/c0/5700c04197ee9a4372a35ef16eb78f4e.jpg"} alt="user-image" />
                             </div>
                             <div className='data-account'>
                                 <p id="mark-1">
-                                    <span className="content-date-profile">Username: <span className="body-date-profile">corpo do username</span></span>
-                                    <span className="content-date-profile">E-mail: <span className="body-date-profile">corpo do email</span></span>
+                                    <span className="content-date-profile">Username: <span className="body-date-profile">{userData?.username}</span></span>
+                                    <span className="content-date-profile">E-mail: <span className="body-date-profile">{userData?.email}</span></span>
                                 </p>
                                 <p id="mark-2">
                                     <span className="content-date-profile">Nome: <span className="body-date-profile">corpo do nome</span></span>
-                                    <span className="content-date-profile">Tipo: <span className="body-date-profile">corpo do tipo</span></span>
+                                    <span className="content-date-profile">Tipo: <span className="body-date-profile">{userData?.tipo}</span></span>
                                 </p>
                             </div>
                         </div>
