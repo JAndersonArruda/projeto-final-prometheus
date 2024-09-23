@@ -58,36 +58,23 @@ export default function Profile() {
                     <div className="content-data-certificate">
                         <h4 className="title-section-certificate">Certificados</h4>
                         <div className="certificate">
-                            <CertificateItem
-                                name={"Certificado 00371291173"}
-                                date={"20/10/2024"}
-                                timeLine={"3:00"}
-                            />
-                            <CertificateItem
-                                name={"Certificado 00371291173"}
-                                date={"20/10/2024"}
-                                timeLine={"3:00"}
-                            />
-                            <CertificateItem
-                                name={"Certificado 00371291173"}
-                                date={"20/10/2024"}
-                                timeLine={"3:00"}
-                            />
-                            <CertificateItem
-                                name={"Certificado 00371291173"}
-                                date={"20/10/2024"}
-                                timeLine={"3:00"}
-                            />
-                            <CertificateItem
-                                name={"Certificado 00371291173"}
-                                date={"20/10/2024"}
-                                timeLine={"3:00"}
-                            />
+                            {userData?.certificates && userData.certificates.length > 0 ? (
+                                userData.certificates.map(cert => (
+                                    <CertificateItem
+                                        key={cert.id}
+                                        name={cert.name}
+                                        date={cert.date}
+                                        timeLine={"3:00"}
+                                    />
+                                ))
+                            ) : (
+                                <p>Nenhum certificado encontrado.</p>
+                            )}
                         </div>
                     </div>
                 </div>
-                <div className="area-footer-profile">   
-                    <Footer />
+                <div className="area-footer-profile">
+                    <Footer/>
                 </div>
             </div>
         </>
