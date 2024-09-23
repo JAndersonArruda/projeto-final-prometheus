@@ -1,5 +1,6 @@
 package com.prometheus.projeto_final_prometheus.dto;
 
+import com.prometheus.projeto_final_prometheus.model.Certificates;
 import com.prometheus.projeto_final_prometheus.model.Event;
 import com.prometheus.projeto_final_prometheus.model.UserType;
 
@@ -13,6 +14,7 @@ public record UserResponseDTO(
         String tipo,
         String file,
         Set<Event> createdEvents,
-        Set<Event> eventsAttended
+        Set<Event> eventsAttended,
+        Set<Certificates> certificates
         ) {
 }

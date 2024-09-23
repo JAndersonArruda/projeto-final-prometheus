@@ -1,5 +1,7 @@
 package com.prometheus.projeto_final_prometheus.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.prometheus.projeto_final_prometheus.dto.AuthenticationDTO;
 import com.prometheus.projeto_final_prometheus.dto.LoginResponseDTO;
 import com.prometheus.projeto_final_prometheus.dto.RegisterDTO;
@@ -34,12 +36,18 @@ public class AuthenticationController {
     @Autowired
     private FileStorageService fileStorageService;
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthenticationDTO data) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody AuthenticationDTO data) {
+        logger.info("Recebendo requisição de login para o email: {}", data.email());
+        System.out.println("hel");
         try {
             String token = userService.login(data.email(), data.password());
+            logger.info("Login bem-sucedido para o email: {}", data.email());
             return ResponseEntity.ok(new LoginResponseDTO(token));
         } catch (Exception e) {
+            logger.error("Falha no login para o email: {}. Erro: {}", data.email(), e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDTO("Invalid credentials"));
         }
     }

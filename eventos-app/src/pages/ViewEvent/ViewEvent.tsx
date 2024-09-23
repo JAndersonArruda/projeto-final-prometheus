@@ -4,41 +4,40 @@ import "./viewEvent.css"
 
 import { ArrayTest } from "../../service/ArrayDados"
 
-export default function ViewEvent() {
-    const pathID = 1;
-    const pathEvent = ArrayTest.find(element => element.id === pathID);
-
-    const dateEvent = pathEvent?.dateTime.toLocaleDateString("pt-BR", {
+export default function ViewEvent({ event, onClose }) {
+    const dateEvent = new Date(event.eventDate).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric"
     });
-    const timeEvent = pathEvent?.dateTime.toLocaleTimeString([], {
-        hour: "2-digit", 
+
+    const timeEvent = new Date(event.eventDate).toLocaleTimeString([], {
+        hour: "2-digit",
         minute: "2-digit"
     });
 
     return (
         <>
+            <div className="overlay" onClick={onClose} />
             <div id="container-page" className="container-view-event">
+                <button className="close-button" onClick={onClose}>Fechar</button>
                 <div className="content-image">
-                    <img src={pathEvent?.image} alt="imagem do evento" />
+                    <img src={event.eventImage} alt="imagem do evento" />
                 </div>
                 <div className="content-title">
-                    <h2>{pathEvent?.title}</h2>
+                    <h2>{event.title}</h2>
                 </div>
                 <div className="content-data">
-                    <p className="location">{pathEvent?.localEvent}</p>
+                    <p className="location">{event.location}</p>
                     <p className="time-event">{timeEvent}<span className="date-event">{dateEvent}</span></p>
                 </div>
                 <div className="content-description">
-                    {pathEvent?.description?.split("\n").map((paragraph, index) => (
+                    {event.description?.split("\n").map((paragraph, index) => (
                         <p key={index}>{paragraph}</p>
                     ))}
                 </div>
                 <button className="button-ticket">Realizar Inscrição</button>
             </div>
         </>
-    )
+    );
 }
-

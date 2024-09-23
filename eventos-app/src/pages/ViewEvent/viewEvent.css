@@ -78,8 +78,8 @@
 }
 
 .button-ticket:active {
-    transform: scale(0.95); 
-    background-color: #1c1c1c; 
+    transform: scale(0.95);
+    background-color: #1c1c1c;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
