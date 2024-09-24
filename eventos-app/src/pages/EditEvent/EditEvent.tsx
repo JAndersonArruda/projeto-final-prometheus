@@ -4,8 +4,10 @@ import ModalEvent from "../../components/ModalEvent/ModalEvent";
 
 export default function EditEvent() {
     return (
-        <div>
-            <ModalEvent modo="Editar" />
-        </div>
+        <>
+            <div>
+                <ModalEvent modo="Editar" />
+            </div>
+        </>
     )
 }
