@@ -1,15 +1,15 @@
 // import React from 'react'
 import "./modalEvent.css";
 import { createEvent } from "../../service/eventAPI"
-//import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 interface ModalEventProps {
     modo: string;
 }
 
 export default function ModalEvent({ modo }: ModalEventProps) {
+    const navigate = useNavigate();
     const handleEventClick = ()=>{
-        //const navigate = useNavigate();
         
         const nome = (document.getElementById('nome-imput') as HTMLInputElement).value;
         const data = (document.getElementById('data-imput') as HTMLInputElement).value;
@@ -34,7 +34,7 @@ export default function ModalEvent({ modo }: ModalEventProps) {
                     alert("editando");
                     //EditEvent();
                 }
-                //navigate("/events");
+                navigate("/events");
             }
             catch (error: any){
                 console.log(error);
