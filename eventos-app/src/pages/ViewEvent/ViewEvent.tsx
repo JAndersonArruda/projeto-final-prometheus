@@ -76,15 +76,28 @@ export default function ViewEvent() {
         hour: "2-digit",
         minute: "2-digit"
     });
+    
+    const fetchEventDetails = async () => {
+        try {
+            const eventData = await getEventDetails(eventId);
+            setEvent(eventData);
+        } catch (error) {
+            console.error("Erro ao buscar detalhes do evento:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleEventSubscription = async () => {
         await joinEvent(event.id);
         setIsSubscribed(true);
+        fetchEventDetails();
     };
 
     const handleLeaveEvent = async () => {
         await leaveEvent(event.id);
         setIsSubscribed(false);
+        fetchEventDetails();
     };
 
     const handleIssueCertificates = async () => {
