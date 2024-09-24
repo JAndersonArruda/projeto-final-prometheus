@@ -46,8 +46,9 @@ export default function Home() {
     }, []);
 
     const handleEventClick = (event) => {
+        console.log(event)
         setSelectedEvent(event);
-        navigate(`/events/view/${event.id}`, { state: { event } });
+        navigate(`/events/view/${event.id}`, { state: { eventId: event.id } });
     };
 
     if (loading) {
@@ -75,7 +76,7 @@ export default function Home() {
         <>
             <Header />
             <div id="container-page" className="container-home">
-                <div>
+                <div className="content-styles-home">
                     <div className="container-cards-event">
                         {eventos.length > 0 ? (
                             eventos.map((event: any) => (
