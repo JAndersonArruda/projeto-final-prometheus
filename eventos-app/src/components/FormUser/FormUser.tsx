@@ -40,8 +40,7 @@ export default function FormUser({ modo, value }: FormUserProps) {
             const inputFoto = document.querySelector<HTMLInputElement>("#file-input");
 
             const opcoesUsuario = document.querySelector<HTMLInputElement>('input[name="user-mode"]:checked');
-
-            // Determinando o valor de userType
+            
             let tipoUsuario = "";
             if (opcoesUsuario) {
                 tipoUsuario = opcoesUsuario.id === "type-adm-imput" ? "ADMIN" : 

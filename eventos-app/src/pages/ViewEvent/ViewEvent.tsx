@@ -3,6 +3,7 @@
 import "./viewEvent.css"
 
 import { ArrayTest } from "../../service/ArrayDados"
+import { joinEvent } from "../../service/eventAPI"
 
 export default function ViewEvent({ event, onClose }) {
     const dateEvent = new Date(event.eventDate).toLocaleDateString("pt-BR", {
@@ -15,6 +16,10 @@ export default function ViewEvent({ event, onClose }) {
         hour: "2-digit",
         minute: "2-digit"
     });
+
+    const handleEventSubscription = () =>{
+        joinEvent(event.id);
+    }
 
     return (
         <>
@@ -36,7 +41,7 @@ export default function ViewEvent({ event, onClose }) {
                         <p key={index}>{paragraph}</p>
                     ))}
                 </div>
-                <button className="button-ticket">Realizar Inscrição</button>
+                <button className="button-ticket" onClick={handleEventSubscription}>Realizar Inscrição</button>
             </div>
         </>
     );
