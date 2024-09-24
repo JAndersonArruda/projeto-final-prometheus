@@ -71,6 +71,20 @@ public class EventService {
         eventRepository.save(selectedEvent);
     }
 
+    public void novoEditEvent(String title, String description, String location, LocalDateTime eventDate, Long EventId, String eventImage) {
+        Event selectedEvent = eventRepository.findById(EventId)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+
+        selectedEvent.setTitle(title);
+        selectedEvent.setDescription(description);
+        selectedEvent.setLocation(location);
+        selectedEvent.setEventDate(eventDate);
+        selectedEvent.setUpdatedAt(LocalDateTime.now());
+        selectedEvent.setEventImage(eventImage);
+
+        eventRepository.save(selectedEvent);
+    }
+
     public boolean deleteEventById(Long eventId){
         if(getEventsById(eventId).isPresent()){
             eventRepository.deleteById(eventId);

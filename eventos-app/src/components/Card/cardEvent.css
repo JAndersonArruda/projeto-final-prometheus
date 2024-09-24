@@ -6,6 +6,7 @@
     margin: .5rem;
     padding: .3rem .5rem;
     width: 390px;
+    height: 390px;
     /* Remover altura fixa para torná-la dinâmica */
     overflow: hidden; /* Oculta o excesso da imagem */
     display: flex;
@@ -17,7 +18,7 @@
 
 .card-event img {
     width: 100%; /* Ajusta a largura da imagem para ocupar 100% da área disponível */
-    height: auto; /* Permite que a altura da imagem se ajuste automaticamente */
+    height: 100%; /* Permite que a altura da imagem se ajuste automaticamente */
     max-height: 250px; /* Define uma altura máxima para garantir que não ultrapasse a moldura */
     object-fit: cover; /* Corta a imagem se necessário, sem deformar */
     object-position: center; /* Centraliza a imagem */
@@ -26,8 +27,11 @@
 }
 
 .card-event-body {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     padding: .5rem 0;
+    justify-content: center;
     flex-grow: 1; /* Faz com que o corpo do card ocupe o espaço restante */
 }
 
@@ -36,7 +40,7 @@
 }
 
 .date-time-card {
-    padding: .5rem 0 0;
+    padding: .8rem 0 0;
 }
 
 .date-time-card, .card-event p {

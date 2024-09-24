@@ -78,7 +78,7 @@ export default function Home() {
         <>
             <Header />
             <div id="container-page" className="container-home">
-                <div>
+                <div className="content-styles-home">
                     <div className="container-cards-event">
                         {eventos.length > 0 ? (
                             eventos.map((event) => (

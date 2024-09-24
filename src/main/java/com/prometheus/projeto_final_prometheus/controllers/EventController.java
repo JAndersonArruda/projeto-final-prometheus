@@ -80,9 +80,12 @@ public class EventController {
 
     @PostMapping("/edit/{id}")
     @Secured("ROLE_ADMIN")
-    public ResponseEntity editEventById(@RequestBody EventDTO data, @PathVariable Long id) {
+    public ResponseEntity editEventById(@ModelAttribute EventDTO data,
+                                        @PathVariable Long id,
+                                        @ModelAttribute("file") MultipartFile file) throws IOException {
         try {
-            eventService.editEvent(data.title(), data.description(), data.location(), data.eventDate(), id);
+            String fileName = fileStorageService.storeFile(file);
+            eventService.novoEditEvent(data.title(), data.description(), data.location(), data.eventDate(), id, fileName);
             return ResponseEntity.ok("Event edited successfully");
         }
         catch (IllegalArgumentException e) {
