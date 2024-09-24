@@ -132,3 +132,23 @@ export async function getEventDetails(id) {
         throw error;
     }
 };
+
+export async function issueCertificates(eventId) {
+    const token = localStorage.getItem("token") ?? "";
+
+    const response = await fetch(`${API_BASE_URL}/${eventId}/issue-certificates`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        },
+    });
+
+    if (!response.ok) {
+        alert("Erro ao emitir certificados. Você não tem permissão ou houve um problema.");
+        throw new Error("Não foi possível emitir os certificados");
+    } else {
+        alert("Certificados emitidos com sucesso!");
+    }
+
+    return response.text();
+}
