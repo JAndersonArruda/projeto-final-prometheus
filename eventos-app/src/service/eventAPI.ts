@@ -124,7 +124,7 @@ export async function leaveEvent(id: bigint) {
         throw new Error("Não foi possível cancelar inscrição no evento.");
     }
     else {
-        alert("Registrado no evento com sucesso!");
+        alert("Inscrição cancelado com sucesso!");
     }
 
     return response.text();

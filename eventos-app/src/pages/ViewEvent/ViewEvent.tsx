@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import {getEventDetails, issueCertificates, joinEvent} from "../../service/eventAPI";
+import {getEventDetails, issueCertificates, joinEvent, leaveEvent} from "../../service/eventAPI";
 import { getLoggedUser } from "../../service/userAPI";
 import Header from "../../components/Header/Header.tsx";
 import "./viewEvent.css";
@@ -82,6 +82,11 @@ export default function ViewEvent() {
         setIsSubscribed(true);
     };
 
+    const handleLeaveEvent = async () => {
+        await leaveEvent(event.id);
+        setIsSubscribed(false);
+    };
+
     const handleIssueCertificates = async () => {
         try {
             await issueCertificates(event.id);
@@ -119,6 +124,9 @@ export default function ViewEvent() {
                     <button className="button-certificates" onClick={handleIssueCertificates}>
                         Emitir Certificados
                     </button>
+                )}
+                {isSubscribed && !isCreator && (
+                    <button className="button-ticket" onClick={handleLeaveEvent}>Cancelar Inscrição</button>
                 )}
                 <div className="participants">
                     <h3>Participantes:</h3>
