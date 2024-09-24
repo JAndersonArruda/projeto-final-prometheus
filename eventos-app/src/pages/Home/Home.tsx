@@ -46,8 +46,9 @@ export default function Home() {
     }, []);
 
     const handleEventClick = (event) => {
+        console.log(event)
         setSelectedEvent(event);
-        navigate(`/events/view/${event.id}`, { state: { event } });
+        navigate(`/events/view/${event.id}`, { state: { eventId: event.id } });
     };
 
     if (loading) {

@@ -1,6 +1,7 @@
 package com.prometheus.projeto_final_prometheus.service;
 
 import com.prometheus.projeto_final_prometheus.dto.EventResponseDTO;
+import com.prometheus.projeto_final_prometheus.dto.UserResponseDTO;
 import com.prometheus.projeto_final_prometheus.model.CertificateId;
 import com.prometheus.projeto_final_prometheus.model.Certificates;
 import com.prometheus.projeto_final_prometheus.model.Event;
@@ -110,10 +111,27 @@ public class EventService {
         return false;
     }
 
+    public UserResponseDTO toUserDTO(User user) {
+        UserResponseDTO userResponseDTO = new UserResponseDTO(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getDtCadastro(),
+                user.getTipo().name(),
+                user.getProfileImage(),
+                user.getCreatedEvents(),
+                user.getEventsAttended(),
+                user.getCertificates()
+        );
+
+        return userResponseDTO;
+    }
+
+
     private EventResponseDTO convertToEventResponseDTO(Event event) {
-        Set<Long> participantIds = event.getParticipants().stream()
-                .map(User::getId)
-                .collect(Collectors.toSet());
+        List<UserResponseDTO> participantDTOs = event.getParticipants().stream()
+                .map(this::toUserDTO)  // Use the instance method to maintain context
+                .collect(Collectors.toList());
 
         EventResponseDTO dto = new EventResponseDTO(
                 event.getId(),
@@ -125,7 +143,7 @@ public class EventService {
                 event.getUpdatedAt(),
                 event.getCreator().getId(),
                 event.getEventImage(),
-                participantIds
+                participantDTOs
         );
 
         return dto;

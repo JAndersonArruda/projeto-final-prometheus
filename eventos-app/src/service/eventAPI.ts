@@ -95,3 +95,18 @@ export async function deleteEvent(id: bigint) {
 
     return response.text();
 }
+
+export async function getEventDetails(id) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/id/${id}`);
+
+        if (!response.ok) {
+            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
+};
