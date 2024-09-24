@@ -13,7 +13,7 @@ interface CardEventProps {
     onDelete: () => void;
 }
 
-function CardEvent({ id, title, image, dateTime, localEvent, onClick, onEdit, onDelete } : CardEventProps) {
+function CardEvent({ id, title, image, dateTime, localEvent, onClick, onEdit, onDelete, showEditDelete } : CardEventProps) {
     const dateTimeEvent = new Date(dateTime).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
@@ -25,14 +25,18 @@ function CardEvent({ id, title, image, dateTime, localEvent, onClick, onEdit, on
     return (
         <div id={id.toString()} className="card-event" onClick={onClick}>
             <div className="card-event-icons">
-                <Edit className="icon-button" onClick={(e) => {
-                    e.stopPropagation();
-                    onEdit();
-                }}/>
-                <Delete className="icon-button" onClick={(e) => {
-                    e.stopPropagation();
-                    onDelete();
-                }}/>
+                {showEditDelete && (
+                    <>
+                        <Edit className="icon-button" onClick={(e) => {
+                            e.stopPropagation();
+                            onEdit();
+                        }}/>
+                        <Delete className="icon-button" onClick={(e) => {
+                            e.stopPropagation();
+                            onDelete();
+                        }}/>
+                    </>
+                )}
             </div>
             <img src={image} alt={`Imagem do evento ${title}`}/>
             <div className="card-event-body">

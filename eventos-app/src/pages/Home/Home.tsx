@@ -8,12 +8,14 @@ import { getEventos } from "../../service/eventAPI.ts";
 import {useEffect, useState} from "react";
 import ModalEvent from "../../components/ModalEvent/ModalEvent.tsx";
 import ViewEvent from "../ViewEvent/ViewEvent.tsx";
+import {getLoggedUser} from "../../service/userAPI.ts";
 
 export default function Home() {
     const [eventos, setEventos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
+    const [loggedUserId, setLoggedUserId] = useState(null);
 
     useEffect(() => {
         const fetchEventos = async () => {
@@ -27,7 +29,18 @@ export default function Home() {
             }
         };
 
+        const fetchLoggedUser = async () => {
+            try {
+                const user = await getLoggedUser(); // Chame sua função para obter o usuário logado
+                setLoggedUserId(user.id); // Ajuste conforme necessário
+            } catch (error) {
+                setError("Erro ao buscar usuário logado");
+            }
+        };
+
+
         fetchEventos();
+        fetchLoggedUser();
     }, []);
 
     const handleEventClick = (event) => {
@@ -75,6 +88,7 @@ export default function Home() {
                                         onClick={() => handleEventClick(eventDate)} // Chama a função ao clicar
                                         onEdit={handleEdit}
                                         onDelete={handleDelete}
+                                        showEditDelete={eventDate.creatorId === loggedUserId}
                                     />
                                 ))
                             ) : (
