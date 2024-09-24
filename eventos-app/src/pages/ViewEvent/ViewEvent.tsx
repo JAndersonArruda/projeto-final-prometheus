@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { getEventDetails, joinEvent } from "../../service/eventAPI";
+import {getEventDetails, issueCertificates, joinEvent} from "../../service/eventAPI";
 import { getLoggedUser } from "../../service/userAPI";
 import Header from "../../components/Header/Header.tsx";
 import "./viewEvent.css";
@@ -82,6 +82,15 @@ export default function ViewEvent() {
         setIsSubscribed(true);
     };
 
+    const handleIssueCertificates = async () => {
+        try {
+            await issueCertificates(event.id);
+        } catch (error) {
+            console.error("Erro ao emitir certificados:", error);
+        }
+    };
+
+
     const isCreator = event.creatorId === loggedUserId;
 
     return (
@@ -105,6 +114,11 @@ export default function ViewEvent() {
                 </div>
                 {!isSubscribed && !isCreator && (
                     <button className="button-ticket" onClick={handleEventSubscription}>Realizar Inscrição</button>
+                )}
+                {isCreator && (
+                    <button className="button-certificates" onClick={handleIssueCertificates}>
+                        Emitir Certificados
+                    </button>
                 )}
                 <div className="participants">
                     <h3>Participantes:</h3>
