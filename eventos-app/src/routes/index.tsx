@@ -6,6 +6,8 @@ import Account from '../pages/Account/Account'
 import Profile from '../pages/Profile/Profile'
 import TicketEvent from '../pages/TicketEvent/TicketEvent'
 import ViewEvent from '../pages/ViewEvent/ViewEvent'
+import CreateEvent from '../pages/CreateEvent/CreateEvent'
+import EditEvent from '../pages/EditEvent/EditEvent'
 
 
 const AppRoutes = () => {
@@ -16,8 +18,8 @@ const AppRoutes = () => {
             <Route path="/account/login" element={<Account /> } />
             <Route path="/account/register" element={<Account />} />
             <Route path="/events" element={<Home />} />
-            <Route path="/events/create" element={<Home />} />
-            <Route path="/events/edit/:id" element={<Home />} />
+            <Route path="/events/create" element={<CreateEvent />} />
+            <Route path="/events/edit/:id" element={<EditEvent/>} />
             <Route path="/events/view/:id" element={<ViewEvent />} />
             <Route path="/ticket-event" element={<TicketEvent />} />
             <Route path="/profile" element={<Profile />} />

@@ -3,16 +3,9 @@ import "./modalEvent.css";
 
 interface ModalEventProps {
     modo: string;
-    onSave: () => void;  // Callback para quando o evento for salvo
-    onClose: () => void; // Callback para fechar o modal
 }
 
-export default function ModalEvent({ modo, onSave, onClose }: ModalEventProps) {
-    const handleSaveClick = () => {
-        // Lógica de salvar aqui (pode incluir validação de formulário e outras operações)
-        onSave(); // Chama a função de salvar
-        onClose(); // Fecha o modal logo após o salvar
-    };
+export default function ModalEvent({ modo }: ModalEventProps) {
 
     return (
         <div className="container-modal-event">
@@ -45,9 +38,7 @@ export default function ModalEvent({ modo, onSave, onClose }: ModalEventProps) {
                     <input id="imagem-imput" type="file" name="imagem" />
                 </div>
                 <div className="element-submit-modal">
-                    {/* Substituímos o botão por input type="button" */}
-                    <input type="button" value="Salvar" onClick={handleSaveClick} />
-                    <input type="button" value="Fechar" onClick={onClose} />
+                    <input type="button" value="Salvar" />
                 </div>
             </form>
         </div>
