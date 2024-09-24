@@ -93,7 +93,6 @@ export default function Profile() {
                         <div className="certificate">
                             {userData?.certificates && userData.certificates.length > 0 ? (
                                 userData.certificates.map(cert => (
-                                    console.log(cert),
                                     <CertificateItem
                                         key={cert.id}
                                         name={cert.name}
