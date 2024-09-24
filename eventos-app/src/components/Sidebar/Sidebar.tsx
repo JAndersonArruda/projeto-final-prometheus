@@ -9,7 +9,6 @@ function Sidebar() {
     return (
         <ul className='contianer-sidebar-elements'>
             <li><Link to={"/events"}><Home /> Home</Link></li>
-            <li><Link to={"/account/login"}><Login /> Login</Link></li>
             <li><Link to={"/profile"}><AccountCircle /> Perfil</Link></li>
             <li><Link to={"/ticket-event"}><EditCalendar /> Inscrição</Link></li>
             <li><Link to={"/events/create"}><AddCircle /> Criar Evento</Link></li>
