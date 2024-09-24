@@ -2,16 +2,38 @@
 
 const API_BASE_URL = 'http://localhost:8080/events';
 
+export async function createEvent(title: string, description: string, location: string, eventDate: string, file: File) {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("location", location);
+    formData.append("eventDate", eventDate);
+    formData.append("file", file);
 
-export async function createEvent(eventData: FormData) {
+    console.log(formData);
+    console.log(title, " ", description, " ", location, " ", eventDate);
+
+    const token: string = localStorage.getItem("token") ?? "";
     const response = await fetch(`${API_BASE_URL}/create`, {
         method: "POST",
-        body: eventData
+        headers: {
+            //"Content-Type": "application/json",
+            "Authorization": `${token}`,
+        },
+        body: formData,
     });
+
+    console.log(response);
+
     if (!response.ok) {
-        throw new Error("Erro ao criar o evento");
+        alert("Você não tem permissão para criar eventos");
+        throw new Error("Usuario não tem permissão para criar eventos");
     }
-    return response.json();
+    else {
+        alert("Evento criado com sucesso");
+    }
+
+    return response.text();
 }
 
 export const getEventos = async () => {
