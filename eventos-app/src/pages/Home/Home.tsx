@@ -33,8 +33,8 @@ export default function Home() {
 
         const fetchLoggedUser = async () => {
             try {
-                const user = await getLoggedUser(); // Chame sua função para obter o usuário logado
-                setLoggedUserId(user.id); // Ajuste conforme necessário
+                const user = await getLoggedUser();
+                setLoggedUserId(user.id);
             } catch (error) {
                 setError("Erro ao buscar usuário logado");
             }
@@ -58,16 +58,14 @@ export default function Home() {
         return <p>Erro ao carregar eventos: {error}</p>;
     }
 
-    function handleEdit() {
-        alert('Editar foi clicado');
+    async function handleEdit(idEvento: bigint) {
+        navigate(`edit/${idEvento}`);
     }
 
     async function handleDelete(idEvento: bigint) {
-        //deleteEvent(idEvento);
-
         try {
-            await deleteEvent(idEvento); // Aguarda a exclusão do evento
-            setEventos((prevEventos) => prevEventos.filter(event => event.id !== idEvento)); // Remove o evento da lista
+            await deleteEvent(idEvento);
+            setEventos((prevEventos) => prevEventos.filter(event => event.id !== idEvento));
         } catch (error) {
             console.error("Erro ao excluir evento:", error);
         }
@@ -80,7 +78,7 @@ export default function Home() {
                 <div>
                     <div className="container-cards-event">
                         {eventos.length > 0 ? (
-                            eventos.map((event) => (
+                            eventos.map((event: any) => (
                                 <CardEvent
                                     key={event.id}
                                     id={event.id}
@@ -89,7 +87,7 @@ export default function Home() {
                                     dateTime={event.eventDate}
                                     localEvent={event.location}
                                     onClick={() => handleEventClick(event)} // Chama a função ao clicar
-                                    onEdit={handleEdit}
+                                    onEdit={() => handleEdit(event.id)}
                                     onDelete={() => handleDelete(event.id)}
                                     showEditDelete={event.creatorId === loggedUserId}
                                 />

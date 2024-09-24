@@ -36,6 +36,40 @@ export async function createEvent(title: string, description: string, location: 
     return response.text();
 }
 
+export async function editEvent(eventID: bigint, title: string, description: string, location: string, eventDate: string, file: File) {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("location", location);
+    formData.append("eventDate", eventDate);
+    formData.append("file", file);
+
+    console.log(formData);
+    console.log(title, " ", description, " ", location, " ", eventDate);
+
+    const token: string = localStorage.getItem("token") ?? "";
+    const response = await fetch(`${API_BASE_URL}/edit/${eventID}`, {
+        method: "POST",
+        headers: {
+            //"Content-Type": "application/json",
+            "Authorization": `${token}`,
+        },
+        body: formData,
+    });
+
+    console.log(response);
+
+    if (!response.ok) {
+        alert("Usuario não tem permissão para editar esse evento");
+        throw new Error("Usuario não tem permissão para editar esse evento");
+    }
+    else {
+        alert("Evento editado com sucesso");
+    }
+
+    return response.text();
+}
+
 export const getEventos = async () => {
     try {
         const response = await fetch(API_BASE_URL);
