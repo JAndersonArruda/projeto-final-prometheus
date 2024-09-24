@@ -9,13 +9,15 @@ import {useEffect, useState} from "react";
 import ModalEvent from "../../components/ModalEvent/ModalEvent.tsx";
 import ViewEvent from "../ViewEvent/ViewEvent.tsx";
 import {getLoggedUser} from "../../service/userAPI.ts";
+import {useNavigate} from "react-router-dom";
 
 export default function Home() {
     const [eventos, setEventos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [selectedEvent, setSelectedEvent] = useState(null);
     const [loggedUserId, setLoggedUserId] = useState(null);
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchEventos = async () => {
@@ -44,11 +46,8 @@ export default function Home() {
     }, []);
 
     const handleEventClick = (event) => {
-        setSelectedEvent(event); // Armazena o evento clicado
-    };
-
-    const handleCloseView = () => {
-        setSelectedEvent(null); // Reseta o evento selecionado ao fechar
+        setSelectedEvent(event);
+        navigate(`/events/view/${event.id}`, { state: { event } });
     };
 
     if (loading) {
@@ -78,35 +77,31 @@ export default function Home() {
         <>
             <Header />
             <div id="container-page" className="container-home">
-                {selectedEvent ? (
-                    <ViewEvent event={selectedEvent} onClose={handleCloseView} />
-                ) : (
-                    <div>
-                        <div className="container-cards-event">
-                            {eventos.length > 0 ? (
-                                eventos.map((event) => (
-                                    <CardEvent
-                                        key={event.id}
-                                        id={event.id}
-                                        title={event.title}
-                                        image={event.eventImage}
-                                        dateTime={event.eventDate}
-                                        localEvent={event.location}
-                                        onClick={() => handleEventClick(event)} // Chama a função ao clicar
-                                        onEdit={handleEdit}
-                                        onDelete={() => handleDelete(event.id)}
-                                        showEditDelete={event.creatorId === loggedUserId}
-                                    />
-                                ))
-                            ) : (
-                                <p>Nenhum evento disponível.</p>
-                            )}
-                        </div>
-                        <div className="area-home">
-                            <Footer />
-                        </div>
+                <div>
+                    <div className="container-cards-event">
+                        {eventos.length > 0 ? (
+                            eventos.map((event) => (
+                                <CardEvent
+                                    key={event.id}
+                                    id={event.id}
+                                    title={event.title}
+                                    image={event.eventImage}
+                                    dateTime={event.eventDate}
+                                    localEvent={event.location}
+                                    onClick={() => handleEventClick(event)} // Chama a função ao clicar
+                                    onEdit={handleEdit}
+                                    onDelete={() => handleDelete(event.id)}
+                                    showEditDelete={event.creatorId === loggedUserId}
+                                />
+                            ))
+                        ) : (
+                            <p>Nenhum evento disponível.</p>
+                        )}
                     </div>
-                )}
+                    <div className="area-home">
+                        <Footer />
+                    </div>
+                </div>
             </div>
         </>
     );

@@ -4,8 +4,13 @@ import "./viewEvent.css"
 
 import { ArrayTest } from "../../service/ArrayDados"
 import { joinEvent } from "../../service/eventAPI"
+import {useLocation} from "react-router-dom";
+import Header from "../../components/Header/Header.tsx";
 
-export default function ViewEvent({ event, onClose }) {
+export default function ViewEvent() {
+    const location = useLocation();
+    const event = location.state?.event;
+
     const dateEvent = new Date(event.eventDate).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
@@ -23,9 +28,8 @@ export default function ViewEvent({ event, onClose }) {
 
     return (
         <>
-            <div className="overlay" onClick={onClose} />
+            <Header />
             <div id="container-page" className="container-view-event">
-                <button className="close-button" onClick={onClose}>Fechar</button>
                 <div className="content-image">
                     <img src={event.eventImage} alt="imagem do evento" />
                 </div>
