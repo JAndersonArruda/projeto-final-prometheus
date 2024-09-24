@@ -1,5 +1,7 @@
 package com.prometheus.projeto_final_prometheus.service;
 
+import com.prometheus.projeto_final_prometheus.dto.EventResponseDTO;
+import com.prometheus.projeto_final_prometheus.model.CertificateId;
 import com.prometheus.projeto_final_prometheus.model.Certificates;
 import com.prometheus.projeto_final_prometheus.model.Event;
 import com.prometheus.projeto_final_prometheus.model.User;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -34,21 +37,28 @@ public class EventService {
     }
 
     @Transactional
-    public List<Event> getEventsByCreator(Long creatorId) {
-        return eventRepository.findByCreatorId(creatorId);
+    public List<EventResponseDTO> getEventsByCreator(Long creatorId) {
+        List<Event> events = eventRepository.findByCreatorId(creatorId);
+        return events.stream()
+                .map(this::convertToEventResponseDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+    public List<EventResponseDTO> getAllEvents() {
+        List<Event> events = eventRepository.findAll();
+        return events.stream()
+                .map(this::convertToEventResponseDTO)
+                .collect(Collectors.toList());
     }
 
-    public Optional<Event> getEventsById(Long EventId) {
-        return eventRepository.findEventsById(EventId);
+    public Optional<EventResponseDTO> getEventsById(Long eventId) {
+        return eventRepository.findEventsById(eventId)
+                .map(this::convertToEventResponseDTO);
     }
 
     public void editEvent(String title, String description, String location, LocalDateTime eventDate, Long EventId) {
-        Event selectedEvent = getEventsById(EventId)
+        Event selectedEvent = eventRepository.findById(EventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
 
         selectedEvent.setTitle(title);
@@ -71,7 +81,8 @@ public class EventService {
     @Transactional
     public boolean insertParticipant(Long eventId, Long userId) {
         if(getEventsById(eventId).isPresent()) {
-            Event selectedEvent = getEventsById(eventId).get();
+            Event selectedEvent = eventRepository.findById(eventId)
+                    .orElseThrow(() -> new RuntimeException("Event not found"));
 
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("User not found"));
@@ -86,7 +97,8 @@ public class EventService {
     @Transactional
     public boolean leaveEvent(Long eventId, Long userId) {
         if(getEventsById(eventId).isPresent()) {
-            Event selectedEvent = getEventsById(eventId).get();
+            Event selectedEvent = eventRepository.findById(eventId)
+                    .orElseThrow(() -> new RuntimeException("Event not found"));
 
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("User not found"));
@@ -96,5 +108,26 @@ public class EventService {
             return true;
         }
         return false;
+    }
+
+    private EventResponseDTO convertToEventResponseDTO(Event event) {
+        Set<Long> participantIds = event.getParticipants().stream()
+                .map(User::getId)
+                .collect(Collectors.toSet());
+
+        EventResponseDTO dto = new EventResponseDTO(
+                event.getId(),
+                event.getTitle(),
+                event.getDescription(),
+                event.getLocation(),
+                event.getEventDate(),
+                event.getCreatedAt(),
+                event.getUpdatedAt(),
+                event.getCreator().getId(),
+                event.getEventImage(),
+                participantIds
+        );
+
+        return dto;
     }
 }

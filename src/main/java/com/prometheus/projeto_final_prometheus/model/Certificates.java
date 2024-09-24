@@ -41,4 +41,5 @@ public class Certificates {
     @JsonBackReference
     @JoinColumn(name = "evento", nullable = false)
     private Event event;
+
 }

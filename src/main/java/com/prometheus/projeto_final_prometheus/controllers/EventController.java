@@ -1,6 +1,7 @@
 package com.prometheus.projeto_final_prometheus.controllers;
 
 import com.prometheus.projeto_final_prometheus.dto.EventDTO;
+import com.prometheus.projeto_final_prometheus.dto.EventResponseDTO;
 import com.prometheus.projeto_final_prometheus.dto.IdDTO;
 import com.prometheus.projeto_final_prometheus.model.Event;
 import com.prometheus.projeto_final_prometheus.model.User;
@@ -58,21 +59,21 @@ public class EventController {
     }
 
     @GetMapping("/user/{userId}/events")
-    public ResponseEntity<List<Event>> getEventsByUser(@PathVariable Long userId) {
-        List<Event> events = eventService.getEventsByCreator(userId);
+    public ResponseEntity<List<EventResponseDTO>> getEventsByUser(@PathVariable Long userId) {
+        List<EventResponseDTO> events = eventService.getEventsByCreator(userId);
         return ResponseEntity.ok(events);
     }
 
     @GetMapping
     public ResponseEntity getAllEvents() {
-        List<Event> allEvents = eventService.getAllEvents();
+        List<EventResponseDTO> allEvents = eventService.getAllEvents();
 
         return ResponseEntity.ok(allEvents);
     }
 
     @GetMapping("/id/{id}")
     public ResponseEntity getEventById(@PathVariable Long id) {
-        Optional<Event> events = eventService.getEventsById(id);
+        Optional<EventResponseDTO> events = eventService.getEventsById(id);
 
         return ResponseEntity.ok(events.get());
     }
