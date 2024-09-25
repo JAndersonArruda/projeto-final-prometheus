@@ -9,18 +9,25 @@
     flex: 1;
 }
 
-.content-data-personal, .content-data-certificate {
+.content-data-personal,
+.content-data-certificate,
+.content-data-events {
     margin: 2rem 2.5rem 4rem;
 }
 
-.title-section-personal, .title-section-certificate {
-    text-align: justify;
-    text-indent: 1rem;
+.title-section-personal,
+.title-section-certificate,
+.title-section-events {
+    text-align: left;
     margin: 0 0 .5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: .1rem solid #ccc;
 }
 
-.personal, .certificate {
-    border-top: .1rem solid #ccc;
+.personal,
+.certificate,
+.events-list {
     padding: .5rem 0 0;
 }
 
@@ -83,7 +90,8 @@
     color: #000;
 }
 
-.certificate {
+.certificate,
+.events-list {
     display: flex;
     flex-wrap: wrap;
 }

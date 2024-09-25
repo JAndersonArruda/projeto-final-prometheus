@@ -4,18 +4,28 @@ import "./certificateItem.css"
 
 interface CertificateItemProps {
     name: string,
-    // date: Date,
     date: string,
-    timeLine: string
+    validationCode: string
 }
 
-function CertificateItem({ name, date, timeLine } : CertificateItemProps) {
-    // const dateCertificate = date?.dateTime.toLocaleDateString("pt-BR", {
-    //     day: "2-digit",
-    //     month: "2-digit",
-    //     year: "numeric"
-    // });
+function formatarData(stringData: string) {
+    const objDate = new Date(stringData);
+    const dia = String(objDate.getDate()).padStart(2, '0');
+    const mes = String(objDate.getMonth() + 1).padStart(2, '0');
+    const ano = objDate.getFullYear();
     
+    return `${dia}/${mes}/${ano}`;
+}
+
+function formatarHora(stringData: string) {
+    const objDate = new Date(stringData);
+    const hora = String(objDate.getHours()).padStart(2, '0');
+    const minutos = String(objDate.getMinutes()).padStart(2, '0');
+    
+    return `${hora}:${minutos}`;
+}
+
+function CertificateItem({ name, date, validationCode } : CertificateItemProps) {    
     return (
         <div className="container-certificate">
             <div className="content-icon">
@@ -23,7 +33,12 @@ function CertificateItem({ name, date, timeLine } : CertificateItemProps) {
             </div>
             <div className="content-info">
                 <p className="name-event">{name}</p>
-                <p className="date-certificate">{date} <span className="time-line">Carga Horaria: <span className="time-value">{timeLine}</span></span></p>
+                <p className="date-certificate">
+                    Emitido em: {formatarData(date)}  {/*Caso queira exibir o horario formatarHora(date) */}
+                    <span className="time-line"> Código de validação:  
+                        <span className="time-value">{validationCode}</span>
+                    </span>
+                </p>
             </div>
         </div>
     )

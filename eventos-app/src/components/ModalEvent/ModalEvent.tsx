@@ -1,7 +1,7 @@
 // import React from 'react'
 import "./modalEvent.css";
-import { createEvent } from "../../service/eventAPI"
-import { useNavigate } from "react-router-dom"
+import { createEvent, editEvent } from "../../service/eventAPI"
+import { useNavigate, useParams } from "react-router-dom"
 
 interface ModalEventProps {
     modo: string;
@@ -9,7 +9,9 @@ interface ModalEventProps {
 
 export default function ModalEvent({ modo }: ModalEventProps) {
     const navigate = useNavigate();
-    const handleEventClick = ()=>{
+    const { id } = useParams<{ id: string }>();
+
+    const handleEventClick = async ()=>{
         
         const nome = (document.getElementById('nome-imput') as HTMLInputElement).value;
         const data = (document.getElementById('data-imput') as HTMLInputElement).value;
@@ -28,11 +30,17 @@ export default function ModalEvent({ modo }: ModalEventProps) {
             try{
                 
                 if(modo==="Criar"){    
-                    createEvent(nome, descricao, local, dataEvento, foto);
+                    const response = await createEvent(nome, descricao, local, dataEvento, foto);
+                    console.log(response);
                 }
                 else if(modo==="Editar"){
-                    alert("editando");
-                    //EditEvent();
+                    if (id) {
+                        const eventID = BigInt(id);
+                        const response = await editEvent(eventID, nome, descricao, local, dataEvento, foto);
+                        console.log(response);
+                    } else {
+                        console.error("ID não encontrado.");
+                    }
                 }
                 navigate("/events");
             }
