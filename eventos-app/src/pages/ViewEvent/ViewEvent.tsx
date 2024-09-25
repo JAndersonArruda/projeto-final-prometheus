@@ -134,7 +134,7 @@ export default function ViewEvent() {
                     <button className="button-ticket" onClick={handleEventSubscription}>Realizar Inscrição</button>
                 )}
                 {isCreator && (
-                    <button className="button-certificates" onClick={handleIssueCertificates}>
+                    <button className="button-ticket" onClick={handleIssueCertificates}>
                         Emitir Certificados
                     </button>
                 )}

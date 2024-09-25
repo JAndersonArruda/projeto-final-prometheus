@@ -83,6 +83,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+ul {
+    list-style: none;
+}
+
 
 @media (max-width: 901px) {
     .container-view-event {

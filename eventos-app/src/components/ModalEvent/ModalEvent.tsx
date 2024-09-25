@@ -84,7 +84,7 @@ export default function ModalEvent({ modo }: ModalEventProps) {
                     <input id="imagem-imput" type="file" name="imagem" required />
                 </div>
 
-                <div className="element-submit-ticket">
+                <div className="element-submit-modal">
                     <input type="button" value="Salvar" onClick={handleEventClick} />
                 </div>
             </form>
