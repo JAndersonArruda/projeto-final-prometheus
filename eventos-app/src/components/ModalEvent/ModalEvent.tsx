@@ -45,42 +45,33 @@ export default function ModalEvent({ modo }: ModalEventProps) {
 
     return (
         <>
-            <form className="form-ticket">
+            <form className="form-modal">
                 <div className="data-event">
                     <h3>{modo} Evento</h3>
                 </div>
-                <div className="element-ticket">
+                <div className="element-modal">
                     <label htmlFor="nome">Nome</label>
                     <input id="nome-imput" type="text" name="nome" placeholder="Nome" required />
                 </div>
-
-                
-                <div className="element-ticket">
-                    <label htmlFor="firtname">Data</label>
-                    <input id="firtname-imput" type="text" name="firtname" placeholder="Sobrenome" required />
-                </div>
-
                 <div className="element-date-modal">
-                    <div className="element-ticket">
+                    <div className="element-modal">
                         <label htmlFor="data">Data</label>
                         <input id="data-imput" type="date" name="data" required />
                     </div>
-                    <div className="element-ticket">
+                    <div className="element-modal">
                         <label htmlFor="horario">Horário</label>
                         <input id="horario-imput" type="time" name="horario" required />
                     </div>
                 </div>
-
-
-                <div className="element-ticket">
+                <div className="element-modal">
                     <label htmlFor="local">Local</label>
                     <input id="local-imput" type="text" name="local" placeholder="Local" required />
                 </div>
-                <div className="element-ticket">
+                <div className="element-modal">
                     <label htmlFor="descricao">Descrição</label>
                     <textarea id="descricao-imput" name="descricao" rows={10} placeholder="Descrição" required />
                 </div>
-                <div className="element-ticket">
+                <div className="element-modal">
                     <label htmlFor="imagem">Imagem</label>
                     <input id="imagem-imput" type="file" name="imagem" required />
                 </div>

@@ -1,105 +1,4 @@
-.container-modal-event {
-    padding: 3rem 2rem;
-    background-color: #fff;
-    border-radius: .5rem;
-    /* flex-grow: 0;
-    flex: 1 0 auto; */
-}
-
 .form-modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-
-.element-modal {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    width: 30%;
-    padding: .3rem 0;
-}
-
-.element-modal input, .element-modal textarea{
-    width: 100%;
-    padding:.5rem;
-    border-radius:.2rem;
-    border: 1px solid #ccc;
-    margin-bottom:.5rem;
-}
-
-.element-date-modal {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 30%;
-}
-
-#data-imput { 
-    width: 150%;
-}
-
-.element-submit-modal {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    width: 30%;
-    padding: .3rem 0;
-}
-
-.element-submit-modal input {
-    padding:.5rem 1.5rem;
-    border-radius:.5rem;
-    border: 1px solid #ccc;
-    margin-bottom:.5rem;
-}
-
-.element-modal label {
-    margin: 0 0 .2rem .5rem;
-}
-
-
-
-
-
-.container-ticket {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-.data-event {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0 3rem;
-}
-
-.content-data-event {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 1.5rem 0 0;
-    font-size: 14px;
-}
-
-.data-event-time {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-}
-
-.data-event-date {
-    padding: .1rem 0 0;
-}
-
-.form-ticket {
     display: flex;
     flex-direction: column;
     background-color: #fff;    
@@ -113,7 +12,14 @@
     box-shadow: 30px 35px 0px 0px rgba(0,0,0,0.75);
 }
 
-.element-ticket {
+.data-event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0 3rem;
+}
+
+.element-modal {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -121,7 +27,7 @@
     padding: .5rem 0 1rem;
 }
 
-.element-ticket input {
+.element-modal input, .element-modal textarea {
     width: 100%;
     padding:.8rem 0 .8rem .5rem;
     border-radius:.2rem;
@@ -130,7 +36,18 @@
     box-sizing: border-box;   
 }
 
-.element-submit-ticket {
+.element-date-modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.element-date-modal input {
+    width: 99%;
+}
+
+.element-submit-modal {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -138,7 +55,7 @@
     padding: .3rem 0 2.8rem;
 }
 
-.element-submit-ticket input {
+.element-submit-modal input {
     margin-top: 1.5rem;
     padding:.9rem 1.5rem;
     border-radius:1rem;
@@ -151,29 +68,29 @@
     box-sizing: border-box;
 }
 
-.element-submit-ticket input:hover {
+.element-submit-modal input:hover {
     cursor: pointer;
 }
 
-.element-submit-ticket input:active {
+.element-submit-modal input:active {
     transform: scale(0.95); 
     background-color: #1c1c1c; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.element-ticket label {
+.element-modal label {
     margin: 0 0 .2rem .2rem;
 }
 
 
 @media (max-width: 901px) {
-    .form-ticket {
+    .form-modal {
         width: 50%;
     }
 }
 
 @media (max-width: 451px) {
-    .form-ticket {
+    .form-modal {
         width: 70%;
         -webkit-box-shadow: 0px 0px;
         -moz-box-shadow: 0px 0px;
@@ -184,15 +101,15 @@
         font-size: 12px;
     }
 
-    .element-ticket label, .element-submit-ticket input{
+    .element-modal label, .element-modal textarea, .element-submit-modal input{
         font-size: 14px;
     }
 
-    .element-ticket input {
+    .element-modal input {
         font-size: 12px
     }
 
-    .element-ticket {
+    .element-modal {
         padding-bottom: .8rem;
     }
 }
