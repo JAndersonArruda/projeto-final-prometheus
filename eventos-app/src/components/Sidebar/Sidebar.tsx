@@ -10,7 +10,7 @@ function Sidebar() {
         <ul className='contianer-sidebar-elements'>
             <li><Link to={"/profile"}><AccountCircle /> Perfil</Link></li>
             <li><Link to={"/events"}><Home /> Home</Link></li>
-            <li><Link to={"/events/create"}><AddCircle /> Criar Evento</Link></li>
+            <li><Link to={"/events/create"}><AddCircle /> Add    Evento</Link></li>
         </ul>
     )
 }
