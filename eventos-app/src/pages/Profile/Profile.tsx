@@ -130,7 +130,7 @@ export default function Profile() {
                     </div>
                     <div className="content-data-events">
                         <h4 className="title-section-events">Eventos Inscritos</h4>
-                        <div className="events-list">
+                        <div id="ticket-events" className="events-list">
                             {userData?.eventsAttended && userData.eventsAttended.length > 0 ? (
                                 userData.eventsAttended.map(event => (
                                     <CardEvent

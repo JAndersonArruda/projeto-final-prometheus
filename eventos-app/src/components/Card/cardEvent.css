@@ -71,3 +71,26 @@
 .icon-button:hover {
     background-color: rgba(0, 0, 0, 0.8); /* Escurece o fundo ao passar o mouse */
 }
+
+@media (max-width: 451px) {
+    .card-event {
+        height: auto;
+    }
+
+    .card-event img {
+        max-height: 180px;
+    }
+    
+    .card-event-body h2 {
+        font-size: 17.5px;
+    }
+
+    .card-event-body svg {
+        font-size: 14px;
+        padding-right: .5rem;
+    }
+
+    .date-time-card, .card-event p {
+        font-size: 12px;
+    }
+}
