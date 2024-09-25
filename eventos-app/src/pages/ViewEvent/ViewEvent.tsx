@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {getEventDetails, issueCertificates, joinEvent, leaveEvent} from "../../service/eventAPI";
 import { getLoggedUser } from "../../service/userAPI";
@@ -144,7 +144,7 @@ export default function ViewEvent() {
                 <div className="participants">
                     <h3>Participantes:</h3>
                     <ul>
-                        {event.participants.map(participant => (
+                        {event.participants?.map(participant => (
                             <li key={participant.id}>
                                 <p>{participant.username} - {participant.email}</p>
                             </li>
