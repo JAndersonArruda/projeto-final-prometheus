@@ -144,11 +144,15 @@ export default function ViewEvent() {
                 <div className="participants">
                     <h3>Participantes:</h3>
                     <ul>
-                        {event.participants?.map(participant => (
-                            <li key={participant.id}>
-                                <p>{participant.username} - {participant.email}</p>
-                            </li>
-                        ))}
+                        {event.participants?.length > 0 ? (
+                            event.participants.map(participant => (
+                                <li key={participant.id}>
+                                    <p>{participant.username} - {participant.email}</p>
+                                </li>
+                            ))
+                        ) : (
+                            <p>Nenhum participante encontrado.</p>
+                        )}
                     </ul>
                 </div>
             </div>
