@@ -4,6 +4,7 @@
     width: 15rem;
     background-color: #292929;
     color: #fff;
+    transition: transform 0.3s ease;
 }
 
 .container-nav {
@@ -17,12 +18,31 @@
     align-items: center;
     padding: 2rem 0;
 }
-/* 
-.span-second-titulo-logo {
-    
-}
-*/
+
 .image-logo {
     width: 4em;
     filter: brightness(0) invert(1); /* converte a cor para branco */
+}
+
+
+/* Estilos de responsividade */
+@media (max-width: 450px) {
+    .container-header {
+        width: 4rem;
+    }
+
+    .name-logo {
+        display: none;
+    }
+
+    .container-nav {
+        padding: .5rem; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-logo {
+        width: 3rem;
+    }
 }

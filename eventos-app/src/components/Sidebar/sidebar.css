@@ -26,3 +26,12 @@ a:hover {
     color: #b3aeae;
 }
 
+@media (max-width: 450px) {
+    .contianer-sidebar-elements li a span {
+        display: none;
+    }
+
+    svg {
+        padding-left: .3rem;
+    }
+}

@@ -8,9 +8,9 @@ import "./sidebar.css"
 function Sidebar() {
     return (
         <ul className='contianer-sidebar-elements'>
-            <li><Link to={"/profile"}><AccountCircle /> Perfil</Link></li>
-            <li><Link to={"/events"}><Home /> Home</Link></li>
-            <li><Link to={"/events/create"}><AddCircle /> Add    Evento</Link></li>
+            <li><Link to={"/profile"}><AccountCircle /> <span>Perfil</span></Link></li>
+            <li><Link to={"/events"}><Home /> <span>Home</span></Link></li>
+            <li><Link to={"/events/create"}><AddCircle /> <span>Add Evento</span></Link></li>
         </ul>
     )
 }
