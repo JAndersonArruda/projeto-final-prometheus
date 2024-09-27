@@ -1,0 +1,22 @@
+#root {
+    display: flex;
+    flex-direction: row;
+    color: #000000;
+    background-color: #f4f4f4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, #root {
+    min-height: 100vh;
+    text-align: center;
+}
+
+#container-page {
+    flex: 1;
+    overflow-y: auto;
+}
+

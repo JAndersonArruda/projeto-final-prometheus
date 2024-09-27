@@ -1,0 +1,37 @@
+.contianer-sidebar-elements {
+    text-align:left;
+    list-style: none;
+}
+
+.contianer-sidebar-elements li a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.contianer-sidebar-elements svg {
+    margin-right: .5rem;
+}
+
+li {
+    padding: 0 0 .7rem;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #b3aeae;
+}
+
+@media (max-width: 450px) {
+    .contianer-sidebar-elements li a span {
+        display: none;
+    }
+
+    svg {
+        padding-left: .3rem;
+    }
+}

@@ -1,0 +1,148 @@
+.container-profile {
+    display: flex;
+    flex-direction: column;
+    /* min-width: 100vh; */
+    background-color: #fff;
+}
+
+.area-profile {
+    flex: 1;
+}
+
+.content-data-personal,
+.content-data-certificate,
+.content-data-events {
+    margin: 2rem 2.5rem 4rem;
+}
+
+.title-section-personal,
+.title-section-certificate,
+.title-section-events {
+    text-align: left;
+    margin: 0 0 .5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: .1rem solid #ccc;
+}
+
+.personal,
+.certificate,
+.events-list {
+    padding: .5rem 0 0;
+}
+
+#ticket-events {
+    background-color: #f3f3f3;
+}
+
+.data-image-user, .data-account {
+    margin: .5rem 0 0;
+}
+
+.personal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.data-image-user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Centraliza a imagem no contêiner */
+    width: 15%;
+    overflow: hidden; /* Elimina o excesso da imagem que passar */
+    border-radius: 50%; /* Aplica um formato circular ao contêiner */
+}
+
+.image-prifile {
+    width: 100%;
+    height: 100%; /* Mantém a proporção da imagem */
+    object-fit: cover; /* Cobre o contêiner sem distorcer */
+    object-position: center; /* Centraliza a parte da imagem exibida */
+    border-radius: 50%; /* Mantém a imagem circular */
+}
+
+
+.data-account {
+    padding: 0 .5rem;
+    width: 100%;
+}
+
+#mark-1, #mark-2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: justify;
+    height: 50px;
+    margin: .6rem 0;
+    border-radius: .1rem;
+    padding-bottom: .3rem;
+}
+
+#mark-1 {
+    background-color: #f4f4f4;
+}
+
+.content-date-profile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 0 0 .5rem;
+    font-size: 11px;
+    color: #585858;
+}
+
+.body-date-profile {
+    font-size: 13.5px;
+    text-indent: .5rem;
+    color: #000;
+}
+
+.certificate,
+.events-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+@media (max-width: 901px) {
+    .data-image-user {
+        width: 45%;
+    }
+}
+
+@media (max-width: 451px) {
+    .area-profile {
+        padding: .4rem;
+    }
+
+    .personal {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-data-personal,
+    .content-data-certificate,
+    .content-data-events {
+        margin: 1rem 0;
+    }
+
+    .title-section-personal,
+    .title-section-certificate,
+    .title-section-events {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    #mark-1, #mark-2 {
+        height: 40px;
+    }
+
+    .content-date-profile {
+        font-size: 10px;
+    }
+}
